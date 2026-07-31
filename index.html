@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mohammad Askari Dehestani — Systemadministrator</title>
+<meta name="description" content="Nachweise, Weiterbildungen und Projekte von Mohammad Askari Dehestani, Systemadministrator mit über zehn Jahren Praxis.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Mohammad Askari Dehestani — Systemadministrator">
+<meta property="og:type" content="profile">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#tafeln" data-i18n="skip">Zu den Inhalten springen</a>
+
+<header class="kopf">
+  <div class="kopf__name">
+    <strong>Mohammad Askari Dehestani</strong>
+    <span data-i18n="kopf.rolle">Systemadministrator · Netzwerk &amp; IT-Infrastruktur · Erlangen</span>
+  </div>
+  <div class="kopf__rechts">
+    <a class="knopf knopf--voll" id="cv-link" href="assets/docs/Lebenslauf_Mohammad_Askari_Dehestani.pdf" download data-i18n="kopf.cv">Lebenslauf</a>
+    <div class="sprache" role="group" aria-label="Sprache / Language">
+      <button type="button" data-lang="de" aria-pressed="true">DE</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <figure class="buehne">
+    <div id="szene"></div>
+    <figcaption class="hinweis" data-i18n="hinweis">Auf die Anlagenteile tippen — die Angaben öffnen sich als Tafel.</figcaption>
+  </figure>
+
+  <nav class="tafeln" id="tafeln" aria-label="Inhalte"></nav>
+</main>
+
+<footer class="fuss">
+  <span data-i18n="fuss.kontakt">Kontakt</span>
+  <a href="mailto:moli1369@gmail.com">moli1369@gmail.com</a>
+  <a href="tel:+491633666009">+49 163 3666009</a>
+  <a href="https://linkedin.com/in/mohamad-askari" rel="noopener">LinkedIn</a>
+</footer>
+
+<div class="tafel" id="tafel" hidden>
+  <div class="tafel__blatt" role="dialog" aria-modal="true" aria-labelledby="tafel-titel">
+    <button class="tafel__zu" id="tafel-zu" aria-label="Schließen">&times;</button>
+    <p class="augenbraue" id="tafel-marke"></p>
+    <h2 id="tafel-titel"></h2>
+    <div id="tafel-inhalt"></div>
+  </div>
+</div>
+
+<script src="assets/js/inhalte.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

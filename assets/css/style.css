@@ -1,0 +1,252 @@
+/* ---------------------------------------------------------------
+   Mohammad Askari Dehestani — Nachweise und Projekte
+   Die Seite ist bewusst kurz: die gemalte Szene trägt sie, alle
+   Angaben öffnen sich als Tafel. Die Farben sind dem Bild
+   entnommen, damit Rahmen und Illustration eine Einheit bilden.
+   --------------------------------------------------------------- */
+
+:root {
+  --papier:     #F4F1E9;
+  --papier-2:   #EAE5D8;
+  --tinte:      #23282B;
+  --tinte-weich:#5D625E;
+  --linie:      #CFC8B7;
+  --daemmer:    #3F5A72;
+  --kabel:      #B5713A;
+  --signal:     #2E7D52;
+  --rack:       #23282B;
+
+  --sans: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --rand: clamp(1rem, 4vw, 2.5rem);
+  --breite: 72ch;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  display: flex; flex-direction: column;
+  background: var(--papier);
+  color: var(--tinte);
+  font: 400 1rem/1.6 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--daemmer); text-underline-offset: .18em; }
+:focus-visible { outline: 2px solid var(--kabel); outline-offset: 3px; }
+
+.skip { position: absolute; left: -9999px; background: var(--tinte); color: var(--papier); padding: .6rem 1rem; z-index: 40; }
+.skip:focus { left: 1rem; top: 1rem; }
+
+/* --- Kopf --------------------------------------------------------- */
+
+.kopf {
+  display: flex; flex-wrap: wrap; gap: .75rem 1.5rem;
+  align-items: center; justify-content: space-between;
+  padding: .85rem var(--rand);
+  border-bottom: 1px solid var(--linie);
+}
+.kopf__name { display: grid; gap: .1rem; min-width: 0; }
+.kopf__name strong { font-size: 1.02rem; font-weight: 600; letter-spacing: -.01em; }
+.kopf__name span { font-size: .8rem; color: var(--tinte-weich); }
+.kopf__rechts { display: flex; align-items: center; gap: .6rem; }
+
+.knopf {
+  display: inline-block; padding: .5rem .95rem;
+  border: 1px solid var(--linie); background: transparent; color: var(--tinte);
+  font: 500 .85rem/1.2 var(--sans); text-decoration: none; cursor: pointer;
+  transition: border-color .18s, background .18s, color .18s;
+}
+.knopf:hover { border-color: var(--daemmer); color: var(--daemmer); }
+.knopf--voll { background: var(--daemmer); border-color: var(--daemmer); color: #fff; }
+.knopf--voll:hover { background: #33485C; border-color: #33485C; color: #fff; }
+
+.sprache { display: flex; border: 1px solid var(--linie); }
+.sprache button {
+  background: transparent; border: 0; cursor: pointer; padding: .42rem .6rem;
+  font: 500 .72rem/1 var(--mono); letter-spacing: .08em; color: var(--tinte-weich);
+  transition: background .18s, color .18s;
+}
+.sprache button + button { border-left: 1px solid var(--linie); }
+.sprache button[aria-pressed="true"] { background: var(--tinte); color: var(--papier); }
+
+/* --- Bühne -------------------------------------------------------- */
+
+main { flex: 1; display: flex; flex-direction: column; }
+
+/* Die Breite wird so begrenzt, dass die Höhe des Bildes auf den
+   Schirm passt — dadurch entstehen keine toten Ränder im SVG. */
+.buehne {
+  margin: 0 auto; position: relative;
+  width: min(100%, calc(60svh * 1.613));
+}
+@media (max-width: 46rem) { .buehne { width: 100%; } }
+.buehne svg { display: block; width: 100%; height: auto; }
+
+.hinweis {
+  position: absolute; left: 50%; bottom: .5rem; translate: -50% 0;
+  margin: 0; padding: .3rem .8rem;
+  background: rgba(244, 241, 233, .82);
+  border-radius: 2rem;
+  font: 400 .74rem/1.5 var(--mono); color: var(--tinte-weich);
+  white-space: nowrap;
+}
+@media (max-width: 30rem) { .hinweis { font-size: .66rem; white-space: normal; text-align: center; } }
+
+/* Anklickbare Anlagenteile */
+.hot { cursor: pointer; }
+.hot > text { transition: fill .18s; }
+.hot:hover > text, .hot:focus-visible > text { fill: var(--kabel); }
+.hot:hover { filter: brightness(1.06); }
+.marke {
+  font: 500 12px var(--mono); fill: #4A4F4C;
+  letter-spacing: .03em; paint-order: stroke;
+  stroke: rgba(244,241,233,.75); stroke-width: 3px; stroke-linejoin: round;
+}
+.notiz {
+  font: 400 11px var(--mono); fill: #5D625E; paint-order: stroke;
+  stroke: rgba(244,241,233,.7); stroke-width: 3px; stroke-linejoin: round;
+}
+
+/* --- Tafelleiste --------------------------------------------------- */
+
+.tafeln {
+  display: flex; flex-wrap: wrap; gap: .4rem;
+  padding: .9rem var(--rand);
+  border-top: 1px solid var(--linie);
+  background: var(--papier-2);
+}
+.tafeln button {
+  background: transparent; border: 1px solid var(--linie); cursor: pointer;
+  padding: .4rem .8rem; color: var(--tinte-weich);
+  font: 500 .8rem/1.2 var(--sans);
+  transition: border-color .18s, color .18s, background .18s;
+}
+.tafeln button:hover { border-color: var(--daemmer); color: var(--daemmer); background: rgba(255,255,255,.5); }
+
+/* --- Fuß ----------------------------------------------------------- */
+
+.fuss {
+  display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; align-items: baseline;
+  padding: .8rem var(--rand);
+  border-top: 1px solid var(--linie);
+  font-size: .82rem; color: var(--tinte-weich);
+}
+.fuss span { font: 400 .72rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+
+/* --- Tafel (Dialog) ------------------------------------------------ */
+
+.tafel {
+  position: fixed; inset: 0; z-index: 30;
+  background: rgba(35, 40, 43, .52);
+  display: grid; place-items: end stretch;
+  animation: einblenden .18s ease-out;
+}
+@media (min-width: 46rem) { .tafel { place-items: center; padding: var(--rand); } }
+.tafel[hidden] { display: none; }
+@keyframes einblenden { from { opacity: 0 } }
+
+.tafel__blatt {
+  position: relative;
+  background: var(--papier);
+  border: 1px solid var(--tinte);
+  padding: clamp(1.25rem, 4vw, 2rem);
+  width: min(46rem, 100%);
+  max-height: 88svh; overflow-y: auto;
+  animation: auffahren .22s cubic-bezier(.2,.8,.3,1);
+}
+@keyframes auffahren { from { transform: translateY(18px); opacity: .4 } }
+
+.tafel__zu {
+  position: absolute; top: .4rem; right: .6rem;
+  background: none; border: 0; font-size: 1.7rem; line-height: 1;
+  cursor: pointer; color: var(--tinte-weich); padding: .2rem .4rem;
+}
+.tafel__blatt h2 { font: 600 clamp(1.25rem, 3vw, 1.6rem)/1.2 var(--sans); margin: 0 0 1rem; letter-spacing: -.01em; }
+.augenbraue {
+  font: 500 .7rem/1 var(--mono); letter-spacing: .16em; text-transform: uppercase;
+  color: var(--kabel); margin: 0 0 .55rem;
+}
+.tafel__blatt p { margin: 0 0 .9rem; max-width: var(--breite); color: var(--tinte-weich); }
+.tafel__blatt p:last-child { margin-bottom: 0; }
+
+/* Inhalte innerhalb der Tafel */
+
+.posten { border-top: 1px solid var(--linie); padding: .85rem 0; }
+.posten:first-of-type { border-top: 0; padding-top: 0; }
+.posten__kopf { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: baseline; justify-content: space-between; }
+.posten h3 { font: 600 .98rem/1.35 var(--sans); margin: 0; }
+.posten__meta { font: 400 .74rem/1.5 var(--mono); color: var(--tinte-weich); margin: .2rem 0 .45rem; }
+.posten p { margin: 0 0 .4rem; font-size: .92rem; }
+.posten__praxis {
+  display: flex; gap: .5rem; align-items: baseline;
+  font: 500 .85rem/1.5 var(--sans); color: var(--signal); margin: 0;
+}
+.posten__praxis::before {
+  content: ""; width: .48rem; height: .48rem; border-radius: 50%;
+  background: var(--signal); flex: none; translate: 0 -.08em;
+}
+.posten__links { display: flex; gap: .4rem; flex: none; }
+.posten__links .knopf { padding: .3rem .65rem; font-size: .76rem; }
+
+.zahlen { display: flex; flex-wrap: wrap; gap: 1.4rem; margin: .6rem 0 0; }
+.zahlen div { display: grid; }
+.zahlen b { font: 600 1.3rem/1 var(--sans); color: var(--daemmer); letter-spacing: -.02em; }
+.zahlen span { font: 400 .72rem/1.4 var(--mono); color: var(--tinte-weich); }
+
+.liste { margin: 0; padding: 0; list-style: none; }
+.liste li { padding: .3rem 0 .3rem 1rem; position: relative; font-size: .94rem; color: var(--tinte-weich); }
+.liste li::before { content: "–"; position: absolute; left: 0; color: var(--kabel); }
+.liste b { color: var(--tinte); font-weight: 600; }
+
+.paar { display: grid; gap: 0; margin: 0; }
+.paar div { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: .8rem; padding: .55rem 0; border-bottom: 1px solid var(--linie); }
+.paar div:last-child { border-bottom: 0; }
+.paar dt { font: 400 .76rem/1.6 var(--mono); color: var(--tinte-weich); }
+.paar dd { margin: 0; overflow-wrap: anywhere; }
+@media (max-width: 30rem) { .paar div { grid-template-columns: 1fr; gap: .1rem; } }
+
+.sammel { margin-top: 1.2rem; }
+
+/* Dekorative Ebenen der Szene fangen keine Klicks ab */
+#szene svg > rect, #szene svg > circle, #szene svg > path, #szene svg > g[opacity], #szene svg > text {
+  pointer-events: none;
+}
+#szene svg .hot, #szene svg .hot * { pointer-events: auto; }
+
+/* Die Ebenen der Tiefenstaffelung werden per Skript verschoben;
+   der leichte Überstand verhindert Ränder an den Bildkanten. */
+#szene svg .ebene { will-change: transform; }
+.buehne { overflow: hidden; }
+
+/* --- Konsolen ------------------------------------------------------ */
+
+.konsolen { display: grid; gap: .8rem; }
+@media (min-width: 42rem) { .konsolen { grid-template-columns: 1fr 1fr; } }
+
+.konsole__kopf {
+  font: 500 .72rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--tinte-weich); margin: 0 0 .4rem;
+}
+.konsole__feld {
+  background: #1B1F21; color: #D6D2C6;
+  border-radius: 8px; padding: .8rem .9rem; margin: 0;
+  font: 400 .74rem/1.75 var(--mono);
+  white-space: pre-wrap; overflow-wrap: anywhere;
+  min-height: 15rem; max-height: 15rem; overflow: hidden;
+}
+.konsole__feld .eingabe { color: #7FB4D8; }
+.zeiger {
+  display: inline-block; width: .42rem; height: .78rem;
+  background: #9FE1CB; vertical-align: -.1em;
+  animation: blinken 1s steps(1) infinite;
+}
+@keyframes blinken { 50% { opacity: 0 } }
