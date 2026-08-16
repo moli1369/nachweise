@@ -1,318 +1,40 @@
-/* ---------------------------------------------------------------
-   Sprachumschaltung, Laden der Szene und Aufbau der Tafeln.
-   Die Texte stehen in inhalte.js.
-   --------------------------------------------------------------- */
-
-const SPRACHEN = ["de", "en"];
-const SPEICHER = "sprache";
-
-function startsprache() {
-  const ausUrl = new URLSearchParams(location.search).get("lang");
-  if (SPRACHEN.includes(ausUrl)) return ausUrl;
-  try {
-    const gemerkt = localStorage.getItem(SPEICHER);
-    if (SPRACHEN.includes(gemerkt)) return gemerkt;
-  } catch { /* Speicher gesperrt — kein Problem */ }
-  return (navigator.language || "de").toLowerCase().startsWith("en") ? "en" : "de";
-}
-
-let sprache = startsprache();
-const t = (schluessel) => UI[sprache][schluessel] ?? schluessel;
-const esc = (s) => String(s).replace(/[&<>"]/g, (c) =>
-  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-
-/* --- Tafelinhalt ---------------------------------------------------- */
-
-function inhaltBauen(art, daten) {
-  const teile = [];
-
-  if (daten.text) teile.push(daten.text.map((p) => `<p>${esc(p)}</p>`).join(""));
-
-  if (art === "nachweise") {
-    teile.push(NACHWEISE.map((n) => {
-      const x = n[sprache];
-      return `<article class="posten">
-        <div class="posten__kopf">
-          <h3>${esc(x.titel)}</h3>
-          <div class="posten__links">
-            <a class="knopf" href="assets/certificates/${esc(n.datei)}" rel="noopener">${esc(t("ansehen"))}</a>
-            <a class="knopf" href="assets/certificates/${esc(n.datei)}" download>PDF</a>
-          </div>
-        </div>
-        <p class="posten__meta">${esc(n.anbieter)} · ${esc(n.jahr)} · ${esc(x.umfang)}</p>
-        <p>${esc(x.inhalt)}</p>
-        <p class="posten__praxis">${esc(x.praxis)}</p>
-      </article>`;
-    }).join(""));
-    teile.push(`<p class="sammel"><a class="knopf knopf--voll" href="assets/docs/Zertifikatsmappe.pdf" download>${esc(t("alle"))}</a></p>`);
-  }
-
-  if (art === "projekte") {
-    teile.push(PROJEKTE.map((p) => {
-      const x = p[sprache];
-      return `<article class="posten">
-        <p class="augenbraue">${esc(x.tag)}</p>
-        <h3>${esc(x.titel)}</h3>
-        <p>${esc(x.text)}</p>
-        <div class="zahlen">${x.zahlen.map(([w, l]) => `<div><b>${esc(w)}</b><span>${esc(l)}</span></div>`).join("")}</div>
-      </article>`;
-    }).join(""));
-  }
-
-  if (art === "stationen") {
-    teile.push(STATIONEN.map((s) => {
-      const x = s[sprache];
-      return `<article class="posten">
-        <h3>${esc(x.titel)}</h3>
-        <p class="posten__meta">${esc(x.meta)}</p>
-        <ul class="liste">${x.punkte.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>
-      </article>`;
-    }).join(""));
-  }
-
-  if (art === "kenntnisse") {
-    teile.push(`<ul class="liste">${KENNTNISSE.map((k) => {
-      const [label, wert] = k[sprache];
-      return `<li><b>${esc(label)}:</b> ${esc(wert)}</li>`;
-    }).join("")}</ul>`);
-  }
-
-  if (art === "konsole") {
-    teile.push('<div class="konsolen">' + KONSOLEN.map((k, i) =>
-      `<div class="konsole">
-         <p class="konsole__kopf">${esc(k.kopf)}</p>
-         <pre class="konsole__feld" id="konsole-${i}" aria-live="off"></pre>
-       </div>`).join("") + "</div>");
-  }
-
-  if (art === "paar" && daten.paare) {
-    teile.push(`<dl class="paar">${daten.paare.map(([dt, dd]) =>
-      `<div><dt>${esc(dt)}</dt><dd>${dd}</dd></div>`).join("")}</dl>`);
-  }
-
-  return teile.join("");
-}
-
-
-/* --- Konsolen ---------------------------------------------------------
-   Die beiden Sitzungen tippen sich selbst. Die Zeitgeber werden beim
-   Schließen der Tafel wieder abgeräumt, damit im Hintergrund nichts
-   weiterläuft.
-   ---------------------------------------------------------------------- */
-
-let tippUhren = [];
-
-function tippenAnhalten() {
-  tippUhren.forEach(clearTimeout);
-  tippUhren = [];
-}
-
-function tippenStarten() {
-  tippenAnhalten();
-  const ruhig = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  KONSOLEN.forEach((konsole, i) => {
-    const feld = document.getElementById("konsole-" + i);
-    if (!feld) return;
-
-    if (ruhig) {
-      feld.innerHTML = konsole.zeilen
-        .map(([p, c]) => (p ? '<span class="eingabe">' + esc(p) + "</span>" : "") + esc(c))
-        .join("\n");
-      return;
-    }
-
-    let z = 0, k = 0, aus = "";
-    const takt = () => {
-      if (z >= konsole.zeilen.length) {
-        tippUhren.push(setTimeout(() => { aus = ""; z = 0; k = 0; takt(); }, 4000));
-        return;
-      }
-      const [eingang, befehl] = konsole.zeilen[z];
-      if (k === 0 && eingang) aus += '<span class="eingabe">' + esc(eingang) + "</span>";
-      if (k < befehl.length) {
-        aus += esc(befehl[k]); k++;
-        feld.innerHTML = aus + '<span class="zeiger"></span>';
-        tippUhren.push(setTimeout(takt, eingang ? 26 : 12));
-      } else {
-        aus += "\n"; z++; k = 0;
-        feld.innerHTML = aus + '<span class="zeiger"></span>';
-        tippUhren.push(setTimeout(takt, eingang ? 380 : 180));
-      }
-      feld.scrollTop = feld.scrollHeight;
-    };
-    tippUhren.push(setTimeout(takt, i * 700));
-  });
-}
-
-/* --- Tafel öffnen und schließen -------------------------------------- */
-
-const tafel = document.getElementById("tafel");
-let vorherFokus = null;
-
-function tafelOeffnen(schluessel) {
-  const eintrag = TAFELN[schluessel];
-  if (!eintrag) return;
-  const d = eintrag[sprache];
-  vorherFokus = document.activeElement;
-  document.getElementById("tafel-marke").textContent = d.marke;
-  document.getElementById("tafel-titel").textContent = d.titel;
-  document.getElementById("tafel-inhalt").innerHTML = inhaltBauen(d.art, d);
-  tafel.hidden = false;
-  document.body.style.overflow = "hidden";
-  document.getElementById("tafel-zu").focus();
-  if (d.art === "konsole") tippenStarten();
-}
-
-function tafelSchliessen() {
-  tippenAnhalten();
-  tafel.hidden = true;
-  document.body.style.overflow = "";
-  if (vorherFokus && vorherFokus.focus) vorherFokus.focus();
-}
-
-document.getElementById("tafel-zu").addEventListener("click", tafelSchliessen);
-tafel.addEventListener("click", (e) => { if (e.target === tafel) tafelSchliessen(); });
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && !tafel.hidden) tafelSchliessen();
-});
-
-/* --- Oberfläche ------------------------------------------------------ */
-
-function oberflaeche() {
-  document.documentElement.lang = sprache;
-  document.querySelectorAll("[data-i18n]").forEach((el) => { el.textContent = t(el.dataset.i18n); });
-  document.getElementById("cv-link").href = t("cv.datei");
-  document.getElementById("tafel-zu").setAttribute("aria-label", t("zu"));
-  const svg = document.querySelector("#szene svg");
-  if (svg) svg.setAttribute("aria-label", t("szene.alt"));
-  document.querySelectorAll(".sprache button").forEach((b) => {
-    b.setAttribute("aria-pressed", String(b.dataset.lang === sprache));
-  });
-}
-
-function beschriften() {
-  document.querySelectorAll("#szene [data-key]").forEach((teil) => {
-    const eintrag = TAFELN[teil.dataset.key];
-    if (!eintrag) return;
-    const marke = eintrag[sprache].marke;
-    const text = teil.querySelector("text");
-    if (text) text.textContent = marke;
-    teil.setAttribute("aria-label", marke);
-  });
-}
-
-function knoepfeBauen() {
-  const leiste = document.getElementById("tafeln");
-  leiste.innerHTML = REIHENFOLGE.map((k) =>
-    `<button type="button" data-oeffnen="${k}">${esc(TAFELN[k][sprache].marke)}</button>`).join("");
-  leiste.querySelectorAll("[data-oeffnen]").forEach((b) => {
-    b.addEventListener("click", () => tafelOeffnen(b.dataset.oeffnen));
-  });
-}
-
-/* --- Szene ----------------------------------------------------------- */
-
-
-/* --- Tiefenstaffelung ------------------------------------------------
-   Die Ebenen der Szene folgen dem Zeiger unterschiedlich schnell.
-   Ferne Hügel wandern mit, der Vordergrund läuft dagegen — das Auge
-   liest daraus Tiefe, ohne dass eine 3D-Bibliothek nötig wäre.
-   Auf Geräten ohne feinen Zeiger und bei reduzierter Bewegung bleibt
-   das Bild ruhig.
-   -------------------------------------------------------------------- */
-
-function tiefeAktivieren() {
-  const buehne = document.querySelector(".buehne");
-  const svg = document.querySelector("#szene svg");
-  if (!buehne || !svg) return;
-
-  const ruhig = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const grob  = window.matchMedia("(pointer: coarse)");
-  if (ruhig.matches || grob.matches) return;
-
-  const ebenen = [...svg.querySelectorAll(".ebene")].map((el) => ({
-    el, tiefe: parseFloat(el.dataset.tiefe) || 0, x: 0, y: 0, zx: 0, zy: 0
-  }));
-  if (!ebenen.length) return;
-
-  let laeuft = false;
-
-  function schritt() {
-    let bewegung = false;
-    for (const e of ebenen) {
-      e.x += (e.zx - e.x) * 0.08;
-      e.y += (e.zy - e.y) * 0.08;
-      if (Math.abs(e.zx - e.x) > 0.01 || Math.abs(e.zy - e.y) > 0.01) bewegung = true;
-      e.el.setAttribute("transform", `translate(${e.x.toFixed(2)} ${e.y.toFixed(2)})`);
-    }
-    if (bewegung) requestAnimationFrame(schritt);
-    else laeuft = false;
-  }
-
-  function anstossen() {
-    if (!laeuft) { laeuft = true; requestAnimationFrame(schritt); }
-  }
-
-  buehne.addEventListener("pointermove", (ev) => {
-    const kasten = buehne.getBoundingClientRect();
-    const ax = (ev.clientX - kasten.left) / kasten.width  - 0.5;
-    const ay = (ev.clientY - kasten.top)  / kasten.height - 0.5;
-    for (const e of ebenen) { e.zx = ax * e.tiefe; e.zy = ay * e.tiefe * 0.4; }
-    anstossen();
-  });
-
-  buehne.addEventListener("pointerleave", () => {
-    for (const e of ebenen) { e.zx = 0; e.zy = 0; }
-    anstossen();
-  });
-}
-
-function szeneVerdrahten() {
-  document.querySelectorAll("#szene [data-key]").forEach((teil) => {
-    teil.setAttribute("tabindex", "0");
-    teil.setAttribute("role", "button");
-    teil.addEventListener("click", () => tafelOeffnen(teil.dataset.key));
-    teil.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); tafelOeffnen(teil.dataset.key); }
-    });
-  });
-  beschriften();
-  oberflaeche();
-  tiefeAktivieren();
-}
-
-async function szeneLaden() {
-  const host = document.getElementById("szene");
-  try {
-    const antwort = await fetch("assets/img/szene.svg");
-    if (!antwort.ok) throw new Error(antwort.status);
-    host.innerHTML = await antwort.text();
-  } catch {
-    host.innerHTML = '<img src="assets/img/szene.svg" alt="' + t("szene.alt") + '" style="width:100%;height:auto">';
-    const h = document.querySelector(".hinweis");
-    if (h) h.remove();
-    return;
-  }
-  szeneVerdrahten();
-}
-
-/* --- Umschalten ------------------------------------------------------- */
-
-function spracheSetzen(neu) {
-  if (!SPRACHEN.includes(neu) || neu === sprache) return;
-  sprache = neu;
-  try { localStorage.setItem(SPEICHER, neu); } catch { /* egal */ }
-  oberflaeche();
-  beschriften();
-  knoepfeBauen();
-  if (!tafel.hidden) tafelSchliessen();
-}
-
-document.querySelectorAll(".sprache button").forEach((b) => {
-  b.addEventListener("click", () => spracheSetzen(b.dataset.lang));
-});
-
-oberflaeche();
-knoepfeBauen();
-szeneLaden();
+const LANGS=['de','en'];
+let lang=localStorage.getItem('portfolio-lang')||((navigator.language||'de').startsWith('en')?'en':'de');
+const $=s=>document.querySelector(s); const esc=v=>String(v).replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));
+const COPY={de:{
+ skip:'Zu den Inhalten springen',nav:{experience:'Experience',projects:'Projects',stack:'Stack',certificates:'Certificates',cv:'Lebenslauf'},
+ hero:{eyebrow:'IT INFRASTRUCTURE · ERLANGEN, GERMANY',lead:'10+ Jahre Praxis in Netzwerken, Servern, Virtualisierung, Security und Automation — mit einem starken Fokus auf stabile, messbare Infrastruktur.',projects:'Featured Projects',contact:'Kontakt aufnehmen'},
+ stats:{years:'Jahre Praxis',devices:'Geräte automatisiert',link:'Richtfunkstrecke',hypervisors:'Virtualisierungsplattformen'},
+ about:{title:'Ich baue und betreibe Infrastruktur, die im echten Betrieb funktionieren muss.',text:'Mein Schwerpunkt liegt an der Schnittstelle von Netzwerk, Serverbetrieb, Virtualisierung und Security. Dazu kommt Python-Automation: repetitive Aufgaben werden zu reproduzierbaren, schnellen Abläufen.'},
+ projects:{title:'Projekte mit Ergebnis.',intro:'Nicht nur „mit Technologie gearbeitet“ — sondern Probleme gelöst, Risiken reduziert und Abläufe beschleunigt.'},
+ experience:{title:'Berufserfahrung.',intro:'Die wichtigsten Stationen, verdichtet auf Verantwortung und technische Wirkung.'},
+ stack:{title:'Werkzeuge, die ich wirklich eingesetzt habe.',intro:'Ein kompakter Überblick über Infrastruktur, Plattformen, Security, Monitoring und Entwicklung.'},
+ certificates:{title:'Zertifikate, die Praxis ergänzen.',all:'Alle Nachweise als PDF ↓'},terminal:{title:'Mindset: messen, automatisieren, absichern.'},
+ contact:{title:'Bereit für die nächste Infrastruktur-Herausforderung.',text:'Für Bewerbungen, technische Gespräche oder Rückfragen zu meinen Projekten.'},
+ view:'Ansehen',pdf:'PDF',practice:'Praxis',details:'Details',company:'Unternehmen'
+},en:{
+ skip:'Skip to content',nav:{experience:'Experience',projects:'Projects',stack:'Stack',certificates:'Certificates',cv:'CV'},
+ hero:{eyebrow:'IT INFRASTRUCTURE · ERLANGEN, GERMANY',lead:'10+ years of hands-on work across networks, servers, virtualization, security and automation — focused on reliable, measurable infrastructure.',projects:'Featured Projects',contact:'Get in touch'},
+ stats:{years:'Years of practice',devices:'Devices automated',link:'Microwave link',hypervisors:'Virtualization platforms'},
+ about:{title:'I build and run infrastructure that has to work in real operations.',text:'My focus sits at the intersection of networking, server operations, virtualization and security. Python automation turns repetitive tasks into fast, repeatable workflows.'},
+ projects:{title:'Projects with outcomes.',intro:'Not just “worked with technology” — solved problems, reduced risk and accelerated operations.'},
+ experience:{title:'Professional experience.',intro:'Key roles distilled down to responsibility and technical impact.'},
+ stack:{title:'Tools I actually used in production.',intro:'A compact view of infrastructure, platforms, security, monitoring and development.'},
+ certificates:{title:'Credentials that complement practice.',all:'Download all credentials ↓'},terminal:{title:'Mindset: measure, automate, secure.'},
+ contact:{title:'Ready for the next infrastructure challenge.',text:'For applications, technical conversations or questions about my projects.'},
+ view:'View',pdf:'PDF',practice:'Practice',details:'Details',company:'Company'
+}};
+function t(key){return key.split('.').reduce((a,k)=>a?.[k],COPY[lang])??key}
+function applyCopy(){document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));$('#cv-link').href=lang==='de'?'assets/docs/Lebenslauf_Mohammad_Askari_Dehestani.pdf':'assets/docs/CV_Mohammad_Askari_Dehestani_EN.pdf';document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));}
+function projectTags(i){return [['Network','OSPF · Microwave'],['Automation','Python · Incident Response'],['Virtualization','P2V · Proxmox · VMware'],['Industrial IT','SIMATIC · WinCC']][i]?.map(x=>`<span>${x}</span>`).join('')||''}
+function renderProjects(){const root=$('#project-grid');if(!root)return;root.innerHTML=PROJEKTE.map((p,i)=>{const x=p[lang];return `<article class="project-card" tabindex="0" data-project="${i}"><div class="project-index">PROJECT / 0${i+1}</div><h3>${esc(x.titel)}</h3><p>${esc(x.text)}</p><div class="project-tags">${projectTags(i)}</div><div class="project-footer">${x.zahlen.map(([v,l])=>`<div class="metric"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('')}</div></article>`}).join('');root.querySelectorAll('[data-project]').forEach(c=>c.addEventListener('click',()=>openProject(+c.dataset.project)));}
+function renderExperience(){const root=$('#experience-list');if(!root)return;root.innerHTML=STATIONEN.map((s,i)=>{const x=s[lang];const meta=x.meta||'';const company=(meta.split('·')[0]||'').trim();return `<article class="experience-card"><div class="timeline-dot"></div><div class="experience-body"><div class="experience-meta">0${i+1} / ${esc(meta)}</div><h3>${esc(x.titel)}</h3><div class="company">${esc(company)}</div><ul>${(x.punkte||[]).map(p=>`<li>${esc(p)}</li>`).join('')}</ul></div></article>`}).join('');}
+function renderCertificates(){const root=$('#certificate-grid');if(!root)return;root.innerHTML=NACHWEISE.map((n,i)=>{const x=n[lang];return `<article class="cert-card"><div class="cert-top"><span class="cert-badge">${esc(n.anbieter)}</span><span class="cert-year">${esc(n.jahr)}</span></div><h3>${esc(x.titel)}</h3><p>${esc(x.inhalt)}</p><div class="cert-actions"><a href="assets/certificates/${esc(n.datei)}" target="_blank" rel="noopener">${t('view')} ↗</a><a href="assets/certificates/${esc(n.datei)}" download>${t('pdf')} ↓</a></div></article>`}).join('');}
+function openModal(k,title,body){const m=$('#modal');$('#modal-kicker').textContent=k;$('#modal-title').textContent=title;$('#modal-body').innerHTML=`<div class="modal-content">${body}</div>`;m.hidden=false;document.body.style.overflow='hidden';$('#modal-close').focus();}
+function openProject(i){const x=PROJEKTE[i][lang];const proof=x.zahlen.map(([v,l])=>`<span>${esc(v)} · ${esc(l)}</span>`).join('');openModal(x.tag,x.titel,`<p>${esc(x.text)}</p><div class="modal-proof">${proof}</div><div class="modal-proof"><span>Network Infrastructure</span><span>Operations</span><span>Problem Solving</span></div>`);}
+function closeModal(){const m=$('#modal');m.hidden=true;document.body.style.overflow='';}
+const terminalLines={de:['$ systemctl status infrastructure','● network.service      active / OSPF + LAN/WAN','● virtualization        active / Proxmox + VMware','● monitoring.service    active / PRTG + Zabbix','● security.service      hardened / Fortinet','','$ python automation.py --target 300-devices','[+] authentication ................. OK','[+] remediation .................... OK','[+] hardening ....................... OK','[+] completed in < 1 hour','','$ echo "ship less manual work"','ship less manual work.'],en:['$ systemctl status infrastructure','● network.service      active / OSPF + LAN/WAN','● virtualization        active / Proxmox + VMware','● monitoring.service    active / PRTG + Zabbix','● security.service      hardened / Fortinet','','$ python automation.py --target 300-devices','[+] authentication ................. OK','[+] remediation .................... OK','[+] hardening ....................... OK','[+] completed in < 1 hour','','$ echo "ship less manual work"','ship less manual work.']};
+function animateTerminal(){const out=$('#terminal-output');if(!out)return;const lines=terminalLines[lang];const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduced){out.textContent=lines.join('\n');return;}let i=0;function tick(){if(i>=lines.length)return;out.textContent+= (i?'\n':'')+lines[i++]; setTimeout(tick, i===1?300:70)}tick();}
+function init(){applyCopy();renderProjects();renderExperience();renderCertificates();animateTerminal();document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{const next=b.dataset.lang;if(!LANGS.includes(next)||next===lang)return;lang=next;try{localStorage.setItem('portfolio-lang',lang)}catch{}applyCopy();renderProjects();renderExperience();renderCertificates();$('#terminal-output').textContent='';animateTerminal();}));$('#modal-close').addEventListener('click',closeModal);$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#modal').hidden)closeModal()});
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.08});document.querySelectorAll('.section,.project-card,.experience-card,.stack-card,.cert-card,.stats').forEach(el=>io.observe(el));}
+init();
