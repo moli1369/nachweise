@@ -1,0 +1,1 @@
+Redesign UI translations live in ui-overrides.js.
