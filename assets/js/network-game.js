@@ -1,11 +1,136 @@
 (() => {
-  const lab=document.querySelector('#network-game');
-  if(!lab) return;
+  const lab = document.querySelector('#network-game');
+  if (!lab) return;
 
-  const style=document.createElement('style');
-  style.textContent=`.hero-visual{background:linear-gradient(145deg,rgba(8,22,36,.98),rgba(4,12,22,.98))}.hero-visual .visual-body{grid-template-columns:1fr;padding:.85rem}.hero-visual .mini-terminal{display:none}.hero-visual .visual-tags{justify-content:center}.hero-visual .network-panel{border-radius:14px}.noc-panel{display:grid;grid-template-columns:1.25fr .75fr;gap:.7rem;padding:.7rem}.noc-map{position:relative;min-height:250px;border:1px solid var(--line);border-radius:14px;background:radial-gradient(circle at center,rgba(66,199,255,.08),transparent 58%),#06121f;overflow:hidden}.noc-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(66,199,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(66,199,255,.035) 1px,transparent 1px);background-size:28px 28px}.noc-svg{position:absolute;inset:0;width:100%;height:100%}.noc-link{fill:none;stroke:rgba(66,199,255,.22);stroke-width:2}.noc-flow{stroke-dasharray:3 14;animation:nocflow 2.2s linear infinite}.noc-node rect{fill:#0a1a2a;stroke:rgba(66,199,255,.28);stroke-width:1.2}.noc-node text{fill:#cfe7f4;text-anchor:middle;font:600 9px var(--mono);letter-spacing:.06em}.noc-node .s{fill:#5e7f92;font-size:6px;font-weight:500}.noc-core circle{fill:#0c2637;stroke:rgba(66,199,255,.7);stroke-width:1.5}.noc-core text{fill:#ecf8ff;text-anchor:middle;font:600 8px var(--mono)}.noc-core .s{fill:#6d91a4;font-size:6px}.noc-packet{fill:#fff;filter:drop-shadow(0 0 6px rgba(255,255,255,.95));animation:nocpacket 4s linear infinite}@keyframes nocflow{to{stroke-dashoffset:-68}}@keyframes nocpacket{0%{cx:18%;cy:50%}45%{cx:50%;cy:50%}100%{cx:84%;cy:50%}}.noc-status{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}.noc-card{padding:.72rem;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.018)}.noc-card span{display:block;color:#5e788a;font:500 .5rem var(--mono);letter-spacing:.08em;text-transform:uppercase}.noc-card strong{display:block;margin-top:.18rem;color:#ddecf5;font-size:.82rem}.noc-card em{font-style:normal;color:var(--green);font:500 .53rem var(--mono)}.noc-meta{display:flex;justify-content:space-between;gap:.5rem;margin-top:.55rem;padding:.52rem .62rem;border:1px solid var(--line);border-radius:9px;color:#627b8c;font:500 .53rem var(--mono)}.vendor-lab{margin-top:.85rem;border:1px solid rgba(66,199,255,.16);border-radius:16px;background:#02080e;overflow:hidden;box-shadow:0 20px 70px rgba(0,0,0,.2)}.vendor-tabs{display:flex;align-items:center;gap:.35rem;flex-wrap:wrap;padding:.65rem;border-bottom:1px solid var(--line);background:rgba(255,255,255,.018)}.vendor-tab{border:1px solid var(--line);border-radius:8px;padding:.45rem .65rem;background:rgba(255,255,255,.02);color:#8fa7b8;font:600 .58rem var(--mono);cursor:pointer}.vendor-tab.active{color:var(--cyan);border-color:rgba(66,199,255,.45);background:rgba(66,199,255,.08)}.vendor-help{margin-left:auto;color:#637c8e;font:500 .51rem var(--mono)}.vendor-main{display:grid;grid-template-columns:1.45fr .7fr}.vendor-screen{min-height:260px;padding:.95rem;overflow:auto;background:radial-gradient(circle at 20% 10%,rgba(66,199,255,.05),transparent 28%),#02070c;color:#b7cad7;font:500 .67rem/1.65 var(--mono)}.vendor-line{margin:.08rem 0}.v-prompt{color:var(--cyan)}.v-ok{color:var(--green)}.v-info{color:#83bfde}.v-warn{color:#ffb478}.v-error{color:#ff8793}.vendor-guide{border-left:1px solid var(--line);padding:.8rem;background:#03101a}.vendor-guide h4{margin:0;color:#c9dce7;font-size:.72rem}.vendor-guide p{margin:.3rem 0 .7rem;color:#698193;font:500 .55rem/1.45 var(--mono)}.vendor-cmd{display:block;width:100%;text-align:left;margin:.38rem 0;padding:.42rem .5rem;border:1px solid var(--line);border-radius:7px;background:rgba(255,255,255,.02);color:#9fc2d4;font:500 .55rem var(--mono);cursor:pointer}.vendor-cmd:hover{border-color:rgba(66,199,255,.3);color:var(--cyan)}.vendor-input{display:flex;align-items:center;gap:.5rem;padding:.62rem .75rem;border-top:1px solid var(--line);background:#030a11}.vendor-prompt{color:var(--cyan);font:600 .66rem var(--mono);white-space:nowrap}.vendor-input input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:#eef8ff;font:500 .66rem var(--mono)}.vendor-input button{border:1px solid rgba(66,199,255,.22);border-radius:7px;padding:.4rem .58rem;background:rgba(66,199,255,.06);color:var(--cyan);font:600 .56rem var(--mono);cursor:pointer}.vendor-tip{padding:.45rem .75rem;border-top:1px solid var(--line);color:#5f788b;font:500 .5rem var(--mono)}@media(max-width:900px){.noc-panel{grid-template-columns:1fr}.vendor-main{grid-template-columns:1fr}.vendor-guide{border-left:0;border-top:1px solid var(--line)}}@media(max-width:600px){.noc-map{min-height:210px}.vendor-screen{min-height:220px;font-size:.61rem}.vendor-help{width:100%;margin-left:0}.vendor-prompt{font-size:.6rem}.vendor-input input{font-size:.6rem}}`;
+  const style = document.createElement('style');
+  style.textContent = `
+    .network-lab .game-topbar{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(8,24,39,.98),rgba(3,10,18,.98));}
+    .network-lab .game-topbar:after{content:"";position:absolute;inset:auto -20% -70% -20%;height:140px;background:radial-gradient(circle,rgba(66,199,255,.11),transparent 62%);pointer-events:none}
+    .network-lab .game-map-body{position:relative;min-height:470px;background:radial-gradient(circle at 50% 48%,rgba(66,199,255,.09),transparent 38%),#02070d;overflow:hidden}
+    .network-lab .game-map-body:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(66,199,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(66,199,255,.035) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+    .lab-svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+    .lab-link{fill:none;stroke:rgba(66,199,255,.17);stroke-width:1.5;stroke-dasharray:3 9;animation:labflow 2.4s linear infinite}
+    .lab-link.active{stroke:#42c7ff;stroke-width:2.4;stroke-dasharray:8 7;filter:drop-shadow(0 0 7px rgba(66,199,255,.55))}
+    .lab-link.done{stroke:#79edbc;stroke-width:2.4;stroke-dasharray:8 7;filter:drop-shadow(0 0 7px rgba(121,237,188,.45))}
+    .lab-node{cursor:pointer}
+    .lab-node rect,.lab-node circle{fill:#081723;stroke:rgba(66,199,255,.3);stroke-width:1.4;transition:.2s}
+    .lab-node:hover rect,.lab-node:hover circle,.lab-node.active rect,.lab-node.active circle{stroke:#42c7ff;filter:drop-shadow(0 0 12px rgba(66,199,255,.35))}
+    .lab-node.target rect,.lab-node.target circle{stroke:#ffb478;filter:drop-shadow(0 0 11px rgba(255,180,120,.28))}
+    .lab-node.success rect,.lab-node.success circle{stroke:#79edbc;filter:drop-shadow(0 0 11px rgba(121,237,188,.28))}
+    .lab-node text{fill:#e5f4fb;text-anchor:middle;font-family:var(--mono);font-weight:600;letter-spacing:.08em;font-size:9px;pointer-events:none}
+    .lab-node .sub{fill:#638398;font-size:5.8px;font-weight:500;letter-spacing:.04em}
+    .lab-node .ip{fill:#3ebce8;font-size:5.2px;font-weight:500}
+    .packet-dot{fill:#fff;filter:drop-shadow(0 0 8px rgba(255,255,255,.95));transition:cx .6s ease,cy .6s ease}
+    .packet-trail{fill:none;stroke:rgba(255,255,255,.32);stroke-width:1.2;stroke-dasharray:2 7}
+    .map-status{position:absolute;left:18px;right:18px;bottom:16px;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border:1px solid rgba(180,215,240,.1);border-radius:12px;background:rgba(1,8,14,.72);backdrop-filter:blur(8px);font:500 .55rem var(--mono);color:#7692a4}
+    .map-status strong{color:#d8edf6}.map-status .ok{color:#79edbc}.map-status .warn{color:#ffb478}
+    .game-choices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+    .game-hop{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.02);color:#acc3d1;text-align:left;cursor:pointer;font:600 .58rem var(--mono);transition:.2s}
+    .game-hop:hover{border-color:rgba(66,199,255,.45);background:rgba(66,199,255,.06);color:#eefaff;transform:translateY(-1px)}
+    .game-hop .small{display:block;margin-top:3px;color:#5f7a8c;font-weight:500;font-size:.48rem}
+    .game-hop.correct{border-color:rgba(121,237,188,.45);background:rgba(121,237,188,.06);color:#79edbc}
+    .game-hop.wrong{border-color:rgba(255,135,147,.45);background:rgba(255,135,147,.05);color:#ff8793}
+    .packet-card{box-shadow:inset 0 1px 0 rgba(255,255,255,.025)}
+    @keyframes labflow{to{stroke-dashoffset:-48}}
+    @media(max-width:800px){.network-lab .game-map-body{min-height:390px}.game-choices{grid-template-columns:1fr}.map-status{font-size:.48rem;bottom:10px;left:10px;right:10px}}
+    @media(max-width:520px){.network-lab .game-map-body{min-height:330px}.lab-node text{font-size:7px}.lab-node .sub{font-size:4.8px}.lab-node .ip{font-size:4.4px}.map-status{padding:8px 9px}.network-lab .game-topbar{flex-wrap:wrap}}
+  `;
   document.head.appendChild(style);
-  function buildHero(){const visual=document.querySelector('.hero-visual');if(!visual)return;visual.innerHTML=`<div class="visual-head"><b>NOC / INFRASTRUCTURE COMMAND CENTER</b><em>● LIVE</em></div><div class="noc-panel"><div><div class="noc-map"><div class="noc-grid"></div><svg class="noc-svg" viewBox="0 0 700 300" aria-hidden="true"><g><path class="noc-link noc-flow" d="M80 150H260"/><path class="noc-link noc-flow" d="M260 150H440"/><path class="noc-link noc-flow" d="M440 150H620"/></g><g class="noc-node"><rect x="24" y="116" width="112" height="68" rx="13"/><text x="80" y="143">EDGE</text><text x="80" y="160" class="s">MIKROTIK / WAN</text></g><g class="noc-core"><circle cx="350" cy="150" r="48"/><text x="350" y="147">CORE</text><text x="350" y="161" class="s">CISCO / OSPF</text></g><g class="noc-node"><rect x="564" y="116" width="112" height="68" rx="13"/><text x="620" y="143">SECURITY</text><text x="620" y="160" class="s">FORTIGATE / POLICY</text></g><circle class="noc-packet" cx="126" cy="150" r="4"/></svg></div><div class="noc-meta"><span>PACKETS / 1.2M</span><span>UPTIME / 99.98%</span><span>LATENCY / 0.7ms</span></div></div><div class="noc-status"><div class="noc-card"><span>Network</span><strong>Operational</strong><em>● OSPF / LAN / WAN</em></div><div class="noc-card"><span>Virtualization</span><strong>Operational</strong><em>● Proxmox / VMware</em></div><div class="noc-card"><span>Security</span><strong>Hardened</strong><em>● FortiGate / ACL</em></div><div class="noc-card"><span>Monitoring</span><strong>Healthy</strong><em>● PRTG / Zabbix</em></div></div></div><div class="visual-tags"><span>CISCO</span><span>MIKROTIK</span><span>FORTIGATE</span><span>OSPF</span><span>VLAN</span><span>PYTHON</span><span>PROXMOX</span><span>ZABBIX</span></div>`}
-  function initVendor(){const el=document.createElement('section');el.className='vendor-lab';el.innerHTML=`<div class="vendor-tabs"><button class="vendor-tab active" data-vendor="cisco">Cisco IOS</button><button class="vendor-tab" data-vendor="mikrotik">MikroTik RouterOS</button><button class="vendor-tab" data-vendor="fortigate">FortiGate</button><span class="vendor-help">Select device → type command → Enter · Tab = autocomplete · ↑↓ = history</span></div><div class="vendor-main"><div><div class="vendor-screen" id="vendor-screen"></div><form class="vendor-input" id="vendor-form"><span class="vendor-prompt" id="vendor-prompt">CORE-R1#</span><input id="vendor-input" autocomplete="off" spellcheck="false" placeholder="Type a command…"><button>RUN</button></form><div class="vendor-tip">Start with <b>help</b>. Switching tabs changes the simulated device and command language.</div></div><aside class="vendor-guide"><h4 id="vendor-title"></h4><p id="vendor-desc"></p><div id="vendor-cmds"></div></aside></div>`;const footer=lab.querySelector('.game-footer');footer?lab.insertBefore(el,footer):lab.appendChild(el);const screen=el.querySelector('#vendor-screen'),input=el.querySelector('#vendor-input'),prompt=el.querySelector('#vendor-prompt'),title=el.querySelector('#vendor-title'),desc=el.querySelector('#vendor-desc'),cmds=el.querySelector('#vendor-cmds'),form=el.querySelector('#vendor-form');let vendor='cisco',history=[],hi=0,mode='exec';const quick={cisco:{prompt:'CORE-R1#',title:'Cisco IOS quick guide',desc:'IOS syntax for routing, VLANs and interfaces.',commands:['help','show ip route','show vlan brief','show interfaces','configure terminal']},mikrotik:{prompt:'[admin@MT-EDGE] >',title:'MikroTik RouterOS quick guide',desc:'RouterOS uses slash-based menu paths.',commands:['help','/ip route print','/interface print','/ip address print','/ip firewall filter print']},fortigate:{prompt:'FG-EDGE #',title:'FortiGate quick guide',desc:'FortiOS CLI uses get/show/diagnose and config contexts.',commands:['help','get router info routing-table all','show firewall policy','get system status','execute ping 10.20.20.25']}};const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));const write=(s,cls='')=>{const d=document.createElement('div');d.className=`vendor-line ${cls}`;d.innerHTML=s;screen.appendChild(d);screen.scrollTop=screen.scrollHeight};const echo=s=>write(`<span class="v-prompt">${esc(prompt.textContent)}</span> ${esc(s)}`);function guide(){const q=quick[vendor];prompt.textContent=q.prompt;title.textContent=q.title;desc.textContent=q.desc;cmds.innerHTML=q.commands.map(c=>`<button class="vendor-cmd" type="button" data-c="${esc(c)}">${esc(c)}</button>`).join('');cmds.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{input.value=b.dataset.c;input.focus()})}function run(c){const x=c.trim().toLowerCase();echo(c);if(!x)return;if(x==='help'||x==='?'){const a=quick[vendor].commands.concat(vendor==='cisco'?['ping 10.20.20.25','traceroute 10.20.20.25']:vendor==='mikrotik'?['/ping 10.20.20.25','/tool traceroute 10.20.20.25']:['diagnose ip address list','execute traceroute 10.20.20.25']);a.forEach(q=>write(esc(q),'v-info'));return}if(vendor==='cisco'){if(x==='show ip route'){['C 10.10.10.0/24 connected Vlan10','C 10.20.20.0/24 connected Vlan20','O 10.30.30.0/24 via 10.10.10.2','S* 0.0.0.0/0 via 10.10.10.254'].forEach(a=>write(a));return}if(x==='show vlan brief'){['10 CLIENTS active','20 SERVERS active','50 MANAGEMENT active'].forEach(a=>write(a));return}if(x==='show interfaces'){['Gi0/1 up/up 1G WAN','Gi0/2 up/up access vlan 10','Gi0/9 up/up access vlan 20','Gi0/24 up/up trunk'].forEach(a=>write(a));return}if(x==='configure terminal'||x==='conf t'){mode='config';prompt.textContent='CORE-R1(config)#';write('Enter configuration mode.','v-info');return}if(x==='exit'){mode='exec';prompt.textContent=quick.cisco.prompt;write('Leaving configuration mode.','v-info');return}if(mode==='config'&&(x.startsWith('ip route ')||x.startsWith('vlan ')||x.startsWith('interface ')||x==='shutdown'||x==='no shutdown')){write('Command accepted in simulated state.','v-ok');return}}if(vendor==='mikrotik'){if(x==='/ip route print'){['DAC 10.10.10.0/24 vlan10','DAC 10.20.20.0/24 vlan20','DAo 10.30.30.0/24 via 10.10.10.2','DA 0.0.0.0/0 via 10.10.10.254'].forEach(a=>write(a));return}if(x==='/interface print'){['0 R ether1 WAN','1 R ether2 LAN','2 R ether3 SERVER','3 R bridge-lan'].forEach(a=>write(a));return}if(x==='/ip address print'){['10.10.10.1/24 vlan10','10.20.20.1/24 vlan20','10.50.50.1/24 vlan50'].forEach(a=>write(a));return}if(x==='/ip firewall filter print'){['0 accept established,related','1 accept tcp dst-port=443','2 drop src-address-list=blocked','3 drop invalid'].forEach(a=>write(a));return}if(x.startsWith('/ip route add ')){write('route added to simulated routing table.','v-ok');return}}if(vendor==='fortigate'){if(x==='get router info routing-table all'){['C 10.10.10.0/24 port3','C 10.20.20.0/24 port4','S 10.30.30.0/24 10.10.10.2','S* 0.0.0.0/0 10.10.10.254'].forEach(a=>write(a));return}if(x==='show firewall policy'){['edit 10','set name "LAN-to-DMZ"','set srcintf "port3"','set dstintf "port4"','set action accept','next'].forEach(a=>write(a));return}if(x==='get system status'){['FortiGate-VM v7.4','Hostname: FG-EDGE','Operation mode: NAT'].forEach(a=>write(a));return}if(x==='diagnose ip address list'){['10.10.10.1/24 port3','10.20.20.1/24 port4','10.50.50.1/24 port5'].forEach(a=>write(a));return}if(x.startsWith('config ')){mode='config';prompt.textContent='FG-EDGE (config) #';write('Entering configuration context.','v-info');return}if(x==='end'||x==='exit'){mode='exec';prompt.textContent=quick.fortigate.prompt;write('Leaving configuration context.','v-info');return}}const ping=(vendor==='cisco'&&x.startsWith('ping '))||(vendor==='mikrotik'&&x.startsWith('/ping '))||(vendor==='fortigate'&&x.startsWith('execute ping '));if(ping){write('64 bytes from 10.20.20.25: icmp_seq=1 ttl=63 time=0.7 ms','v-ok');write('1 packets transmitted, 1 received, 0% packet loss','v-ok');return}write('% Unknown command for this device. Type help.','v-error')}function switchTo(v){vendor=v;mode='exec';history=[];hi=0;screen.innerHTML='';guide();write(`Connected to ${quick[v].title}.`,'v-info');write('Type help to see supported commands.','v-muted');input.value='';input.focus();el.querySelectorAll('.vendor-tab').forEach(b=>b.classList.toggle('active',b.dataset.vendor===v))}el.querySelectorAll('.vendor-tab').forEach(b=>b.onclick=()=>switchTo(b.dataset.vendor));form.addEventListener('submit',e=>{e.preventDefault();const v=input.value.trim();if(!v)return;history.push(v);hi=history.length;run(v);input.value='' });input.addEventListener('keydown',e=>{if(e.key==='ArrowUp'){e.preventDefault();if(hi>0){hi--;input.value=history[hi]}}else if(e.key==='ArrowDown'){e.preventDefault();if(hi<history.length-1){hi++;input.value=history[hi]}else{hi=history.length;input.value=''}}else if(e.key==='Tab'){e.preventDefault();const v=input.value.trim().toLowerCase();const hit=quick[vendor].commands.find(c=>c.toLowerCase().startsWith(v)&&c.toLowerCase()!==v);if(hit)input.value=hit}});guide();write('Select a vendor tab to connect.','v-info');write('This is an interactive learning simulator.','v-muted')}
-  buildHero(); initVendor();
+
+  const scenarios = [
+    {title:'Client → DMZ',src:'10.10.10.25',dst:'10.20.20.25',vlan:'10',proto:'TCP/443',policy:'ALLOW · WEB',path:['client','cisco','fortigate','server']},
+    {title:'Server → WAN',src:'10.20.20.25',dst:'8.8.8.8',vlan:'20',proto:'ICMP',policy:'NAT · OUTBOUND',path:['server','fortigate','cisco','mikrotik','wan']},
+    {title:'Management → Edge',src:'10.50.50.15',dst:'10.10.10.2',vlan:'50',proto:'SSH/22',policy:'ALLOW · MGMT',path:['mgmt','cisco','mikrotik']}
+  ];
+  const nodes = {
+    client:{x:90,y:245,w:118,h:62,label:'CLIENT VLAN 10',sub:'10.10.10.25',type:'rect'},
+    mgmt:{x:90,y:95,w:118,h:62,label:'MGMT VLAN 50',sub:'10.50.50.15',type:'rect'},
+    cisco:{x:350,y:170,r:52,label:'CISCO CORE',sub:'OSPF · L3',type:'circle'},
+    fortigate:{x:535,y:85,w:132,h:62,label:'FORTIGATE',sub:'POLICY · NAT',type:'rect'},
+    mikrotik:{x:535,y:255,w:132,h:62,label:'MIKROTIK',sub:'EDGE · WAN',type:'rect'},
+    server:{x:665,y:170,w:110,h:62,label:'DMZ SERVER',sub:'10.20.20.25',type:'rect'},
+    wan:{x:700,y:305,r:30,label:'WAN',sub:'8.8.8.8',type:'circle'}
+  };
+  const edges = [
+    ['client','cisco'],['mgmt','cisco'],['cisco','fortigate'],['cisco','mikrotik'],['fortigate','server'],['fortigate','mikrotik'],['mikrotik','wan']
+  ];
+  let scenarioIndex=0, step=0, score=0, mistakes=0;
+
+  const q = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const c = (tag, cls) => { const el=document.createElementNS('http://www.w3.org/2000/svg',tag); if(cls) el.setAttribute('class',cls); return el; };
+  const point = key => { const n=nodes[key]; return {x:n.x,y:n.y}; };
+
+  function buildMap(){
+    const host=lab.querySelector('.game-map-body');
+    if(!host)return;
+    host.querySelector('.lab-svg')?.remove();
+    host.querySelector('.map-status')?.remove();
+    const svg=c('svg','lab-svg');svg.setAttribute('viewBox','0 0 820 350');svg.setAttribute('preserveAspectRatio','xMidYMid meet');svg.setAttribute('role','img');svg.setAttribute('aria-label','Interactive network topology');
+    const linkLayer=c('g');
+    edges.forEach(([a,b],i)=>{const pa=point(a),pb=point(b),path=c('path','lab-link');path.dataset.edge=`${a}-${b}`;path.setAttribute('d',`M ${pa.x} ${pa.y} L ${pb.x} ${pb.y}`);path.style.animationDelay=`${i*.25}s`;linkLayer.appendChild(path)});
+    svg.appendChild(linkLayer);
+    const trail=c('path','packet-trail');trail.setAttribute('d','M90 245 L350 170 L535 85 L665 170');svg.appendChild(trail);
+    const packet=c('circle','packet-dot');packet.id='lab-packet';packet.setAttribute('r','5');packet.setAttribute('cx',nodes.client.x);packet.setAttribute('cy',nodes.client.y);svg.appendChild(packet);
+    Object.entries(nodes).forEach(([key,n])=>{
+      const g=c('g','lab-node');g.dataset.node=key;
+      if(key===nodes.client || key===nodes.mgmt || key===nodes.fortigate || key===nodes.mikrotik || key===nodes.server){const r=c('rect');r.setAttribute('x',n.x-n.w/2);r.setAttribute('y',n.y-n.h/2);r.setAttribute('width',n.w);r.setAttribute('height',n.h);r.setAttribute('rx','14');g.appendChild(r)}else{const circle=c('circle');circle.setAttribute('cx',n.x);circle.setAttribute('cy',n.y);circle.setAttribute('r',n.r);g.appendChild(circle)}
+      const t=c('text');t.setAttribute('x',n.x);t.setAttribute('y',n.y-2);t.textContent=n.label;g.appendChild(t);
+      const s=c('text','sub');s.setAttribute('x',n.x);s.setAttribute('y',n.y+13);s.textContent=n.sub;g.appendChild(s);
+      g.addEventListener('click',()=>chooseNode(key));svg.appendChild(g);
+    });
+    host.appendChild(svg);
+    const status=document.createElement('div');status.className='map-status';status.innerHTML='<span>FORWARDING PLANE · <strong id="map-step">Awaiting packet</strong></span><span id="map-health" class="ok">● SIMULATOR READY</span>';host.appendChild(status);
+  }
+
+  function setMapState(active,next,done=false){
+    lab.querySelectorAll('.lab-node').forEach(n=>n.classList.remove('active','target','success'));
+    if(active)lab.querySelector(`[data-node="${active}"]`)?.classList.add('active');
+    if(next)lab.querySelector(`[data-node="${next}"]`)?.classList.add(done?'success':'target');
+    lab.querySelectorAll('.lab-link').forEach(l=>l.classList.remove('active','done'));
+    if(active && next){const key=`${active}-${next}`,rev=`${next}-${active}`;lab.querySelector(`[data-edge="${key}"]`)?.classList.add(done?'done':'active');lab.querySelector(`[data-edge="${rev}"]`)?.classList.add(done?'done':'active')}
+  }
+
+  function movePacket(to){const n=nodes[to];const p=lab.querySelector('#lab-packet');if(p){p.setAttribute('cx',n.x);p.setAttribute('cy',n.y)}}
+
+  function updateInspector(){
+    const s=scenarios[scenarioIndex];
+    lab.querySelector('[data-packet-src]').textContent=s.src;lab.querySelector('[data-packet-dst]').textContent=s.dst;lab.querySelector('[data-packet-vlan]').textContent=s.vlan;lab.querySelector('[data-packet-proto]').textContent=s.proto;lab.querySelector('[data-packet-rule]').textContent=s.policy;
+    lab.querySelector('.packet-value').textContent=`Scenario ${scenarioIndex+1} / 3 · ${s.title}`;
+    const current=s.path[step],next=s.path[step+1];
+    lab.querySelector('.game-status').textContent=next?`Choose the next hop from ${labelFor(current)}.`:'Packet delivered. Scenario complete.';
+    const choices=lab.querySelector('.game-choices');choices.innerHTML='';
+    if(!next){lab.querySelector('.next-btn').hidden=false;lab.querySelector('#map-step').textContent='DELIVERED';lab.querySelector('#map-health').textContent='● PACKET DELIVERED';lab.querySelector('#map-health').className='ok';setMapState(current,null,true);return}
+    const options=optionsFor(current,next);
+    options.forEach(k=>{const b=document.createElement('button');b.type='button';b.className='game-hop';b.dataset.node=k;b.innerHTML=`${q(labelFor(k))}<span class="small">${q(nodes[k].sub)}</span>`;b.onclick=()=>chooseNode(k);choices.appendChild(b)});
+    setMapState(current,next,false);lab.querySelector('#map-step').textContent=`${labelFor(current)} → ?`;
+    if(current)movePacket(current);
+  }
+
+  function labelFor(k){return nodes[k]?.label||k.toUpperCase();}
+  function optionsFor(current,next){
+    const candidates={client:['cisco'],mgmt:['cisco'],server:['fortigate','cisco'],cisco:['fortigate','mikrotik','client','mgmt'],fortigate:['server','mikrotik','cisco'],mikrotik:['wan','cisco','fortigate'],wan:[]};
+    const base=(candidates[current]||[]).filter(Boolean);return [...new Set([next,...base.filter(x=>x!==next)])].slice(0,4);
+  }
+
+  function chooseNode(k){
+    const s=scenarios[scenarioIndex],current=s.path[step],expected=s.path[step+1];
+    if(!expected||k===current)return;
+    const buttons=[...lab.querySelectorAll('.game-hop')];
+    if(k===expected){score+=10;step++;buttons.find(b=>b.dataset.node===k)?.classList.add('correct');movePacket(k);lab.querySelector('.score-value').textContent=score;setTimeout(updateInspector,240)}
+    else{mistakes++;buttons.find(b=>b.dataset.node===k)?.classList.add('wrong');lab.querySelector('.mistake-value').textContent=mistakes;lab.querySelector('.game-feedback').textContent=`Wrong hop. ${labelFor(k)} is not the next forwarding step.`;lab.querySelector('#map-health').textContent='● ROUTING MISMATCH';lab.querySelector('#map-health').className='warn';setMapState(current,k,false)}
+    dispatchDeviceFromNode(k);
+  }
+
+  function dispatchDeviceFromNode(k){if(['cisco','mikrotik','fortigate'].includes(k))window.dispatchEvent(new CustomEvent('portfolio:device',{detail:{device:k}}))}
+
+  function reset(){scenarioIndex=0;step=0;score=0;mistakes=0;lab.querySelector('.score-value').textContent='0';lab.querySelector('.mistake-value').textContent='0';lab.querySelector('.game-feedback').textContent='New packet loaded.';lab.querySelector('.next-btn').hidden=true;movePacket(scenarios[0].path[0]);updateInspector()}
+  function nextScenario(){scenarioIndex=(scenarioIndex+1)%scenarios.length;step=0;lab.querySelector('.next-btn').hidden=true;lab.querySelector('.game-feedback').textContent=`Scenario ${scenarioIndex+1} loaded.`;movePacket(scenarios[scenarioIndex].path[0]);updateInspector()}
+
+  buildMap();updateInspector();
+  lab.querySelector('.reset-btn')?.addEventListener('click',reset);
+  lab.querySelector('.next-btn')?.addEventListener('click',nextScenario);
+
+  // Keep the Hero as a clean NOC dashboard; the actual Lab below is the interactive simulator.
+  const visual=document.querySelector('.hero-visual');
+  if(visual){visual.innerHTML=`<div class="visual-head"><b>NOC / INFRASTRUCTURE COMMAND CENTER</b><em>● LIVE</em></div><div class="noc-panel"><div class="noc-map"><div class="noc-grid"></div><svg class="noc-svg" viewBox="0 0 700 300"><path class="noc-link noc-flow" d="M80 150H260"/><path class="noc-link noc-flow" d="M260 150H440"/><path class="noc-link noc-flow" d="M440 150H620"/><rect class="noc-node-rect" x="24" y="116" width="112" height="68" rx="13"/><text x="80" y="143" class="noc-text">MIKROTIK</text><text x="80" y="160" class="noc-sub">EDGE / WAN</text><circle class="noc-core" cx="350" cy="150" r="48"/><text x="350" y="147" class="noc-text">CISCO CORE</text><text x="350" y="162" class="noc-sub">OSPF / VLAN</text><rect class="noc-node-rect" x="564" y="116" width="112" height="68" rx="13"/><text x="620" y="143" class="noc-text">FORTIGATE</text><text x="620" y="160" class="noc-sub">SECURITY</text><circle class="noc-packet" cx="126" cy="150" r="4"/></svg><div class="noc-meta"><span>ROUTING <b>ONLINE</b></span><span>SECURITY <b>HARDENED</b></span><span>MONITORING <b>HEALTHY</b></span></div></div></div>`}
 })();
