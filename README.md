@@ -5,7 +5,7 @@ Lebenslauf muss auf zwei Seiten passen; Kursnachweise, Projektdetails und
 Ausrüstungslisten passen dort nicht hinein, sind für eine fachliche
 Einschätzung aber oft genau das Interessante. Diese Seite trägt das nach.
 
-**Live:** https://BENUTZERNAME.github.io/nachweise/
+**Live:** https://moli1369.github.io/nachweise/
 
 ## Aufbau
 
