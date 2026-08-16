@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#07111f">
+  <meta name="theme-color" content="#050b14">
   <title>Mohammad Askari Dehestani — System Administrator & Network Engineer</title>
   <meta name="description" content="IT Portfolio von Mohammad Askari Dehestani — System Administration, Network Engineering, Virtualisierung, Security und Automation.">
   <meta property="og:title" content="Mohammad Askari Dehestani — IT Portfolio">
@@ -15,8 +15,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <div class="noise" aria-hidden="true"></div>
-  <div class="grid" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div><div class="grid" aria-hidden="true"></div>
   <a class="skip" href="#main" data-i18n="skip">Zu den Inhalten springen</a>
 
   <header class="nav">
@@ -25,109 +24,53 @@
       <span class="brand-copy"><b>Mohammad Askari Dehestani</b><small>System Administrator · Network Engineer</small></span>
     </a>
     <nav class="nav-links" aria-label="Navigation">
-      <a href="#experience" data-i18n="nav.experience">Experience</a>
-      <a href="#projects" data-i18n="nav.projects">Projects</a>
-      <a href="#stack" data-i18n="nav.stack">Stack</a>
-      <a href="#certificates" data-i18n="nav.certificates">Certificates</a>
+      <a href="#experience" data-i18n="nav.experience">Experience</a><a href="#projects" data-i18n="nav.projects">Projects</a><a href="#stack" data-i18n="nav.stack">Stack</a><a href="#certificates" data-i18n="nav.certificates">Certificates</a>
     </nav>
-    <div class="nav-actions">
-      <a class="btn btn-ghost" href="assets/docs/Lebenslauf_Mohammad_Askari_Dehestani.pdf" id="cv-link" download data-i18n="nav.cv">Lebenslauf</a>
-      <div class="lang" role="group" aria-label="Sprache / Language"><button data-lang="de" aria-pressed="true">DE</button><button data-lang="en" aria-pressed="false">EN</button></div>
-    </div>
+    <div class="nav-actions"><a class="btn btn-ghost" href="assets/docs/Lebenslauf_Mohammad_Askari_Dehestani.pdf" id="cv-link" download data-i18n="nav.cv">Lebenslauf</a><div class="lang" role="group" aria-label="Sprache / Language"><button data-lang="de" aria-pressed="true">DE</button><button data-lang="en" aria-pressed="false">EN</button></div></div>
   </header>
 
   <main id="main">
     <section class="hero container" id="top">
       <div class="hero-copy">
         <div class="eyebrow"><span class="pulse"></span><span data-i18n="hero.eyebrow">IT INFRASTRUCTURE · ERLANGEN, GERMANY</span></div>
-        <h1>System Administrator<span>& Network Engineer</span></h1>
+        <h1>System Administrator<span>&amp; Network Engineer</span></h1>
         <p class="hero-lead" data-i18n="hero.lead">10+ Jahre Praxis in Netzwerken, Servern, Virtualisierung, Security und Automation — mit einem starken Fokus auf stabile, messbare Infrastruktur.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#projects" data-i18n="hero.projects">Featured Projects <span>↗</span></a>
-          <a class="btn btn-ghost" href="mailto:moli1369@gmail.com" data-i18n="hero.contact">Kontakt aufnehmen</a>
-        </div>
+        <div class="hero-actions"><a class="btn btn-primary" href="#projects" data-i18n="hero.projects">Featured Projects <span>↗</span></a><a class="btn btn-ghost" href="mailto:moli1369@gmail.com" data-i18n="hero.contact">Kontakt aufnehmen</a></div>
         <div class="hero-meta"><span><i></i>Open to IT Infrastructure roles</span><span>Erlangen · Germany</span></div>
       </div>
 
-      <div class="hero-console">
-        <div class="console-top"><span><i></i><i></i><i></i></span><b>mohammad@infra:~</b><span class="console-live">LIVE</span></div>
-        <div class="console-body">
-          <div class="console-line"><em>$</em> whoami</div>
-          <div class="console-output">mohammad.askari</div>
-          <div class="console-line"><em>$</em> role</div>
-          <div class="console-output">System Administrator / Network Engineer</div>
-          <div class="console-line"><em>$</em> focus --current</div>
-          <div class="console-output tags"><span>NETWORK</span><span>VIRTUALIZATION</span><span>SECURITY</span><span>AUTOMATION</span></div>
-          <div class="console-line"><em>$</em> uptime</div>
-          <div class="console-output accent">10+ years of hands-on operations</div>
-          <div class="cursor"></div>
+      <aside class="infra-dashboard" aria-label="Infrastructure dashboard">
+        <div class="dashboard-bar"><div class="dashboard-title"><span class="live-dot"></span><b>INFRASTRUCTURE / LIVE MAP</b></div><span class="dashboard-tag">OPS READY</span></div>
+        <div class="network-map" aria-hidden="true">
+          <div class="map-grid"></div><span class="map-line l1"></span><span class="map-line l2"></span><span class="map-line l3"></span><span class="map-line l4"></span>
+          <div class="node node-core"><b>CORE</b><small>ROUTING</small></div>
+          <div class="node node-firewall"><b>FW</b><small>SECURITY</small></div>
+          <div class="node node-server"><b>SERVER</b><small>VM / LINUX</small></div>
+          <div class="node node-monitor"><b>MON</b><small>PRTG / ZABBIX</small></div>
+          <div class="node node-auto"><b>AUTO</b><small>PYTHON</small></div>
+          <div class="signal s1"></div><div class="signal s2"></div><div class="signal s3"></div>
+          <div class="map-caption"><span>OSPF</span><span>PROXMOX</span><span>FORTINET</span><span>PYTHON</span></div>
         </div>
-      </div>
-    </section>
-
-    <section class="stats container" aria-label="Highlights">
-      <div class="stat"><strong>10+</strong><span data-i18n="stats.years">Jahre Praxis</span></div>
-      <div class="stat"><strong>300+</strong><span data-i18n="stats.devices">Geräte automatisiert</span></div>
-      <div class="stat"><strong>180 km</strong><span data-i18n="stats.link">Richtfunkstrecke</span></div>
-      <div class="stat"><strong>3</strong><span data-i18n="stats.hypervisors">Virtualisierungsplattformen</span></div>
-    </section>
-
-    <section class="about container section" id="about">
-      <div class="section-label">01 / PROFILE</div>
-      <div class="about-grid">
-        <div>
-          <h2 data-i18n="about.title">Ich baue und betreibe Infrastruktur, die im echten Betrieb funktionieren muss.</h2>
+        <div class="dashboard-terminal">
+          <div class="terminal-head"><span><i></i><i></i><i></i></span><b>mohammad@infra:~</b><em>CONNECTED</em></div>
+          <div class="terminal-window"><div class="line"><strong>$</strong> systemctl status infrastructure</div><div class="ok">● network.service &nbsp; active / OSPF + LAN/WAN</div><div class="ok">● virtualization &nbsp;&nbsp; active / Proxmox + VMware</div><div class="ok">● monitoring.service active / PRTG + Zabbix</div><div class="ok">● security.service &nbsp; hardened / Fortinet</div><div class="line"><strong>$</strong> automation --target 300-devices</div><div class="ok">[+] remediation complete &nbsp; <b>&lt; 1 hour</b></div><span class="cursor"></span></div>
         </div>
-        <div class="about-copy">
-          <p data-i18n="about.text">Mein Schwerpunkt liegt an der Schnittstelle von Netzwerk, Serverbetrieb, Virtualisierung und Security. Dazu kommt Python-Automation: repetitive Aufgaben werden zu reproduzierbaren, schnellen Abläufen.</p>
-          <div class="mini-proof"><span>PROXMOX</span><span>VMWARE</span><span>LINUX</span><span>WINDOWS SERVER</span><span>CISCO</span><span>MIKROTIK</span><span>FORTINET</span><span>PYTHON</span></div>
-        </div>
-      </div>
+      </aside>
     </section>
 
-    <section class="projects container section" id="projects">
-      <div class="section-head"><div><div class="section-label">02 / SELECTED WORK</div><h2 data-i18n="projects.title">Projekte mit Ergebnis.</h2></div><p data-i18n="projects.intro">Nicht nur „mit Technologie gearbeitet“ — sondern Probleme gelöst, Risiken reduziert und Abläufe beschleunigt.</p></div>
-      <div id="project-grid" class="project-grid"></div>
-    </section>
+    <section class="stats container" aria-label="Highlights"><div class="stat"><strong>10+</strong><span data-i18n="stats.years">Jahre Praxis</span></div><div class="stat"><strong>300+</strong><span data-i18n="stats.devices">Geräte automatisiert</span></div><div class="stat"><strong>180 km</strong><span data-i18n="stats.link">Richtfunkstrecke</span></div><div class="stat"><strong>3</strong><span data-i18n="stats.hypervisors">Virtualisierungsplattformen</span></div></section>
 
-    <section class="experience container section" id="experience">
-      <div class="section-head"><div><div class="section-label">03 / EXPERIENCE</div><h2 data-i18n="experience.title">Berufserfahrung.</h2></div><p data-i18n="experience.intro">Die wichtigsten Stationen, verdichtet auf Verantwortung und technische Wirkung.</p></div>
-      <div id="experience-list" class="timeline"></div>
-    </section>
+    <section class="about container section" id="about"><div class="section-label">01 / PROFILE</div><div class="about-grid"><div><h2 data-i18n="about.title">Ich baue und betreibe Infrastruktur, die im echten Betrieb funktionieren muss.</h2></div><div class="about-copy"><p data-i18n="about.text">Mein Schwerpunkt liegt an der Schnittstelle von Netzwerk, Serverbetrieb, Virtualisierung und Security. Dazu kommt Python-Automation: repetitive Aufgaben werden zu reproduzierbaren, schnellen Abläufen.</p><div class="mini-proof"><span>PROXMOX</span><span>VMWARE</span><span>LINUX</span><span>WINDOWS SERVER</span><span>CISCO</span><span>MIKROTIK</span><span>FORTINET</span><span>PYTHON</span></div></div></div></section>
 
-    <section class="stack container section" id="stack">
-      <div class="section-head"><div><div class="section-label">04 / TECHNICAL STACK</div><h2 data-i18n="stack.title">Werkzeuge, die ich wirklich eingesetzt habe.</h2></div><p data-i18n="stack.intro">Ein kompakter Überblick über Infrastruktur, Plattformen, Security, Monitoring und Entwicklung.</p></div>
-      <div class="stack-grid">
-        <article class="stack-card featured"><div class="stack-index">A</div><h3>Network Engineering</h3><p>Routing, Switching, ISP/Core Network, LAN/WAN/WLAN, VPN</p><div class="chips"><span>Cisco</span><span>MikroTik</span><span>OSPF</span><span>MPLS</span><span>VPLS</span><span>VLAN</span><span>NAT</span></div></article>
-        <article class="stack-card"><div class="stack-index">B</div><h3>Servers & Virtualization</h3><p>Windows/Linux server operations, HA, migration and backup.</p><div class="chips"><span>Windows Server</span><span>AD / GPO</span><span>Linux</span><span>Proxmox</span><span>VMware ESXi</span><span>Hyper-V</span><span>Ceph</span></div></article>
-        <article class="stack-card"><div class="stack-index">C</div><h3>Security & Monitoring</h3><p>Hardening, incident response, observability and firewalls.</p><div class="chips"><span>Fortinet</span><span>PRTG</span><span>Zabbix</span><span>Grafana</span><span>Firewall</span><span>Hardening</span></div></article>
-        <article class="stack-card"><div class="stack-index">D</div><h3>Automation & Development</h3><p>Scripts, APIs, backend services and practical automation.</p><div class="chips"><span>Python</span><span>FastAPI</span><span>Django</span><span>Flask</span><span>C#</span><span>REST API</span><span>Automation</span></div></article>
-      </div>
-    </section>
-
-    <section class="certificates container section" id="certificates">
-      <div class="section-head"><div><div class="section-label">05 / CREDENTIALS</div><h2 data-i18n="certificates.title">Zertifikate, die Praxis ergänzen.</h2></div><a class="btn btn-ghost" href="assets/docs/Zertifikatsmappe.pdf" download data-i18n="certificates.all">Alle Nachweise als PDF ↓</a></div>
-      <div id="certificate-grid" class="certificate-grid"></div>
-    </section>
-
-    <section class="terminal-section container section">
-      <div class="terminal-head"><div><div class="section-label">06 / OPERATIONS</div><h2 data-i18n="terminal.title">Mindset: messen, automatisieren, absichern.</h2></div></div>
-      <div class="big-terminal"><div class="console-top"><span><i></i><i></i><i></i></span><b>ops@portfolio</b><span class="console-live">SYSTEM OK</span></div><pre id="terminal-output" aria-live="polite"></pre></div>
-    </section>
-
-    <section class="contact container section" id="contact">
-      <div class="contact-box">
-        <div><div class="section-label">07 / CONTACT</div><h2 data-i18n="contact.title">Bereit für die nächste Infrastruktur-Herausforderung.</h2><p data-i18n="contact.text">Für Bewerbungen, technische Gespräche oder Rückfragen zu meinen Projekten.</p></div>
-        <div class="contact-actions"><a class="btn btn-primary" href="mailto:moli1369@gmail.com">moli1369@gmail.com ↗</a><a class="btn btn-ghost" href="https://linkedin.com/in/mohamad-askari" rel="noopener">LinkedIn ↗</a><a class="btn btn-ghost" href="https://github.com/moli1369" rel="noopener">GitHub ↗</a></div>
-      </div>
-    </section>
+    <section class="projects container section" id="projects"><div class="section-head"><div><div class="section-label">02 / SELECTED WORK</div><h2 data-i18n="projects.title">Projekte mit Ergebnis.</h2></div><p data-i18n="projects.intro">Nicht nur „mit Technologie gearbeitet“ — sondern Probleme gelöst, Risiken reduziert und Abläufe beschleunigt.</p></div><div id="project-grid" class="project-grid"></div></section>
+    <section class="experience container section" id="experience"><div class="section-head"><div><div class="section-label">03 / EXPERIENCE</div><h2 data-i18n="experience.title">Berufserfahrung.</h2></div><p data-i18n="experience.intro">Die wichtigsten Stationen, verdichtet auf Verantwortung und technische Wirkung.</p></div><div id="experience-list" class="timeline"></div></section>
+    <section class="stack container section" id="stack"><div class="section-head"><div><div class="section-label">04 / TECHNICAL STACK</div><h2 data-i18n="stack.title">Werkzeuge, die ich wirklich eingesetzt habe.</h2></div><p data-i18n="stack.intro">Ein kompakter Überblick über Infrastruktur, Plattformen, Security, Monitoring und Entwicklung.</p></div><div class="stack-grid"><article class="stack-card featured"><div class="stack-index">A</div><h3>Network Engineering</h3><p>Routing, Switching, ISP/Core Network, LAN/WAN/WLAN, VPN</p><div class="chips"><span>Cisco</span><span>MikroTik</span><span>OSPF</span><span>MPLS</span><span>VPLS</span><span>VLAN</span><span>NAT</span></div></article><article class="stack-card"><div class="stack-index">B</div><h3>Servers &amp; Virtualization</h3><p>Windows/Linux server operations, HA, migration and backup.</p><div class="chips"><span>Windows Server</span><span>AD / GPO</span><span>Linux</span><span>Proxmox</span><span>VMware ESXi</span><span>Hyper-V</span><span>Ceph</span></div></article><article class="stack-card"><div class="stack-index">C</div><h3>Security &amp; Monitoring</h3><p>Hardening, incident response, observability and firewalls.</p><div class="chips"><span>Fortinet</span><span>PRTG</span><span>Zabbix</span><span>Grafana</span><span>Firewall</span><span>Hardening</span></div></article><article class="stack-card"><div class="stack-index">D</div><h3>Automation &amp; Development</h3><p>Scripts, APIs, backend services and practical automation.</p><div class="chips"><span>Python</span><span>FastAPI</span><span>Django</span><span>Flask</span><span>C#</span><span>REST API</span><span>Automation</span></div></article></div></section>
+    <section class="certificates container section" id="certificates"><div class="section-head"><div><div class="section-label">05 / CREDENTIALS</div><h2 data-i18n="certificates.title">Zertifikate, die Praxis ergänzen.</h2></div><a class="btn btn-ghost" href="assets/docs/Zertifikatsmappe.pdf" download data-i18n="certificates.all">Alle Nachweise als PDF ↓</a></div><div id="certificate-grid" class="certificate-grid"></div></section>
+    <section class="terminal-section container section"><div class="terminal-head"><div><div class="section-label">06 / OPERATIONS</div><h2 data-i18n="terminal.title">Mindset: messen, automatisieren, absichern.</h2></div></div><div class="big-terminal"><div class="console-top"><span><i></i><i></i><i></i></span><b>ops@portfolio</b><span class="console-live">SYSTEM OK</span></div><pre id="terminal-output" aria-live="polite"></pre></div></section>
+    <section class="contact container section" id="contact"><div class="contact-box"><div><div class="section-label">07 / CONTACT</div><h2 data-i18n="contact.title">Bereit für die nächste Infrastruktur-Herausforderung.</h2><p data-i18n="contact.text">Für Bewerbungen, technische Gespräche oder Rückfragen zu meinen Projekten.</p></div><div class="contact-actions"><a class="btn btn-primary" href="mailto:moli1369@gmail.com">moli1369@gmail.com ↗</a><a class="btn btn-ghost" href="https://linkedin.com/in/mohamad-askari" rel="noopener">LinkedIn ↗</a><a class="btn btn-ghost" href="https://github.com/moli1369" rel="noopener">GitHub ↗</a></div></div></section>
   </main>
-
   <footer class="footer container"><span>© 2026 Mohammad Askari Dehestani</span><span>System Administrator · Network Engineer · Erlangen</span></footer>
-
   <div class="modal" id="modal" hidden><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" id="modal-close" aria-label="Close">×</button><div class="section-label" id="modal-kicker"></div><h2 id="modal-title"></h2><div id="modal-body"></div></div></div>
-
-  <script src="assets/js/inhalte.js"></script>
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/inhalte.js"></script><script src="assets/js/app.js"></script>
 </body>
 </html>
