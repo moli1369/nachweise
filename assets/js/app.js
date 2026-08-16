@@ -14,8 +14,8 @@ const lines=['$ systemctl status infrastructure','● network.service      activ
 function animateTerminal(){const out=$('#terminal-output');if(!out)return;out.textContent='';const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduced){out.textContent=lines.join('\n');return}let i=0;const tick=()=>{if(i>=lines.length)return;out.textContent+=(i?'\n':'')+lines[i++];setTimeout(tick,i===1?320:75)};tick()}
 function init(){applyCopy();renderProjects();renderExperience();renderCertificates();animateTerminal();document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{if(!LANGS.includes(b.dataset.lang))return;lang=b.dataset.lang;try{localStorage.setItem('portfolio-lang',lang)}catch{}applyCopy();renderProjects();renderExperience();renderCertificates();animateTerminal()}));$('#modal-close').addEventListener('click',closeModal);$('#modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
   const environmentLoader=document.createElement('script');
-  environmentLoader.src=`assets/js/environment-selector.js?v=${Date.now()}`;
-  environmentLoader.defer=true;
+  environmentLoader.src=`assets/js/environment-selector-v2.js?v=1`;
+  environmentLoader.defer=false;
   document.body.appendChild(environmentLoader);
 }
 init();
