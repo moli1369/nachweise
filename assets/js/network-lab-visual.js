@@ -21,9 +21,11 @@
     if (window.__networkVisualBooted) return;
     window.__networkVisualBooted = true;
     try {
-      loadCss('assets/css/recruiter-refinement.css?v=1');
-      await loadScript('assets/js/network-lab-v3.js?v=4');
-      await loadScript('assets/js/recruiter-polish.js?v=1');
+      loadCss('assets/css/recruiter-refinement.css?v=2');
+      loadCss('assets/css/infrastructure-depth.css?v=1');
+      await loadScript('assets/js/network-lab-v3.js?v=5');
+      await loadScript('assets/js/recruiter-polish.js?v=2');
+      await loadScript('assets/js/infrastructure-depth.js?v=1');
     } catch (err) {
       console.error('Portfolio enhancement loader failed', err);
     }
