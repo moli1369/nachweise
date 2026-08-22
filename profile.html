@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0d1117">
+<title>Mohammad Askari Dehestani — Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d1117;--card:#161b22;--line:#30363d;--text:#e6edf3;--muted:#8b949e;--blue:#58a6ff;--accent:#1f6feb}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"IBM Plex Sans",system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.55}
+.wrap{max-width:820px;margin:0 auto;padding:28px 18px 48px}
+.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:12px}
+.avatar{width:56px;height:56px;border-radius:50%;border:2px solid var(--line);object-fit:cover;background:#21262d}
+.brand h1{font-size:1.15rem;font-weight:700}.brand p{color:var(--muted);font-size:.82rem}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card)}
+.lang button{border:0;background:transparent;color:var(--muted);font:600 .78rem "IBM Plex Mono",monospace;padding:9px 16px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:14px}
+.card h2{font-size:1rem;margin-bottom:10px;color:var(--blue)}
+.card p{color:var(--muted);font-size:.92rem}.card strong{color:var(--text)}
+.quote{border-left:3px solid var(--accent);padding-left:12px;margin-top:12px;color:var(--muted);font-size:.88rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+.proj{background:#0d1117;border:1px solid var(--line);border-radius:10px;padding:12px}
+.proj b{display:block;margin-bottom:4px;font-size:.9rem}.proj span{color:var(--muted);font-size:.8rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chips i{font-style:normal;font-size:.72rem;font-family:"IBM Plex Mono",monospace;padding:4px 8px;border-radius:6px;border:1px solid var(--line);color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.actions a{text-decoration:none;font:600 .78rem "IBM Plex Mono",monospace;padding:9px 14px;border-radius:8px;border:1px solid var(--line);color:var(--text)}
+.actions a.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.actions a.green{background:#238636;border-color:#238636;color:#fff}
+.stats{text-align:center;margin:16px 0}.stats img{max-width:100%;height:auto}
+.foot{text-align:center;color:var(--muted);font-size:.78rem;margin-top:20px}
+.back{font-size:.78rem;color:var(--muted);margin-bottom:12px}.back a{color:var(--blue)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="back"><a href="./" data-i="back">← Portfolio</a> · <a href="https://github.com/moli1369">GitHub</a></p>
+  <div class="top">
+    <div class="brand">
+      <img class="avatar" src="https://github.com/moli1369.png" alt="avatar" width="56" height="56">
+      <div>
+        <h1>Mohammad Askari Dehestani</h1>
+        <p data-i="role">Systemadministrator · Netzwerk & IT-Infrastruktur</p>
+      </div>
+    </div>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="de" aria-pressed="true">DE</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+  <div class="card">
+    <h2 data-i="aboutTitle">Über mich</h2>
+    <p data-i="aboutBody">Ich plane, betreibe und absichere <strong>Netzwerk- und Serverinfrastrukturen</strong> — in ISP-, Unternehmens- und Industrieumgebungen.</p>
+    <p style="margin-top:8px"><strong data-i="focusLabel">Schwerpunkte:</strong> <span data-i="focusBody">Virtualisierung · Windows Server / Active Directory · Linux · Routing (OSPF, MPLS) · Monitoring · Python-Automation</span></p>
+    <div class="quote" data-i="aboutQuote">Seit Januar 2026 in Deutschland mit gültigem Aufenthaltstitel und uneingeschränkter Arbeitserlaubnis. Kurzfristig verfügbar · bundesweit umzugsbereit.</div>
+    <div class="actions">
+      <a class="primary" href="./" data-i="btnPortfolio">Portfolio ansehen</a>
+      <a class="green" href="mailto:moli1369@gmail.com" data-i="btnMail">Nachricht schreiben</a>
+      <a href="https://linkedin.com/in/mohamad-askari">LinkedIn</a>
+      <a href="https://github.com/moli1369">GitHub</a>
+    </div>
+  </div>
+  <div class="card">
+    <h2 data-i="projTitle">Ausgewählte Projekte</h2>
+    <div class="grid">
+      <div class="proj"><b data-i="p1t">180 km Richtfunk</b><span data-i="p1d">Qeshm ↔ Bandar Abbas · 5,8 GHz · Point-to-Point · Dauerüberwachung</span></div>
+      <div class="proj"><b data-i="p2t">~300 Geräte bereinigt</b><span data-i="p2d">Incident Response mit Python · unter 1 Stunde statt ~3 Wochen</span></div>
+      <div class="proj"><b data-i="p3t">P2V Migration live</b><span data-i="p3d">Produktivsysteme ohne Neuinstallation · Proxmox · ESXi · Hyper-V</span></div>
+      <div class="proj"><b data-i="p4t">SIMATIC / WinCC</b><span data-i="p4d">Steuerungen für 80-t-Fahrzeuge virtualisiert · Industrie-IT</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2 data-i="stackTitle">Tech Stack</h2>
+    <div class="chips"><i>Linux</i><i>Windows Server</i><i>Python</i><i>MikroTik</i><i>Cisco</i><i>VMware</i><i>Proxmox</i><i>Zabbix</i><i>Active Directory</i><i>Docker</i></div>
+  </div>
+  <div class="card">
+    <h2 data-i="langTitle">Sprachen</h2>
+    <div class="chips">
+      <i data-i="l1">Persisch — Muttersprache</i>
+      <i data-i="l2">Deutsch — B1</i>
+      <i data-i="l3">Englisch — Fachdokumentation</i>
+    </div>
+  </div>
+  <div class="stats">
+    <img src="https://github-readme-stats-one-bice.vercel.app/api?username=moli1369&show_icons=true&theme=radical&hide_border=true" alt="stats" height="160">
+  </div>
+  <p class="foot" data-i="foot">Open to work · Erlangen · Germany</p>
+</div>
+<script>
+const T={de:{back:'← Portfolio',role:'Systemadministrator · Netzwerk & IT-Infrastruktur',aboutTitle:'Über mich',aboutBody:'Ich plane, betreibe und absichere <strong>Netzwerk- und Serverinfrastrukturen</strong> — in ISP-, Unternehmens- und Industrieumgebungen.',focusLabel:'Schwerpunkte:',focusBody:'Virtualisierung · Windows Server / Active Directory · Linux · Routing (OSPF, MPLS) · Monitoring · Python-Automation',aboutQuote:'Seit Januar 2026 in Deutschland mit gültigem Aufenthaltstitel und uneingeschränkter Arbeitserlaubnis. Kurzfristig verfügbar · bundesweit umzugsbereit.',btnPortfolio:'Portfolio ansehen',btnMail:'Nachricht schreiben',projTitle:'Ausgewählte Projekte',p1t:'180 km Richtfunk',p1d:'Qeshm ↔ Bandar Abbas · 5,8 GHz · Point-to-Point · Dauerüberwachung',p2t:'~300 Geräte bereinigt',p2d:'Incident Response mit Python · unter 1 Stunde statt ~3 Wochen',p3t:'P2V Migration live',p3d:'Produktivsysteme ohne Neuinstallation · Proxmox · ESXi · Hyper-V',p4t:'SIMATIC / WinCC',p4d:'Steuerungen für 80-t-Fahrzeuge virtualisiert · Industrie-IT',stackTitle:'Tech Stack',langTitle:'Sprachen',l1:'Persisch — Muttersprache',l2:'Deutsch — B1',l3:'Englisch — Fachdokumentation',foot:'Open to work · Erlangen · Deutschland'},en:{back:'← Portfolio',role:'System Administrator · Network & IT Infrastructure',aboutTitle:'About me',aboutBody:'I design, operate and secure <strong>network and server infrastructure</strong> — in ISP, enterprise and industrial environments.',focusLabel:'Focus areas:',focusBody:'Virtualization · Windows Server / Active Directory · Linux · Routing (OSPF, MPLS) · Monitoring · Python automation',aboutQuote:'In Germany since January 2026 with a valid residence title and unrestricted work permit. Available at short notice · willing to relocate nationwide.',btnPortfolio:'View portfolio',btnMail:'Send a message',projTitle:'Selected projects',p1t:'180 km microwave link',p1d:'Qeshm ↔ Bandar Abbas · 5.8 GHz · Point-to-Point · continuous monitoring',p2t:'~300 devices remediated',p2d:'Incident response with Python · under 1 hour instead of ~3 weeks',p3t:'Live P2V migration',p3d:'Production systems without reinstall · Proxmox · ESXi · Hyper-V',p4t:'SIMATIC / WinCC',p4d:'Controllers for 80-t vehicles virtualized · industrial IT',stackTitle:'Tech Stack',langTitle:'Languages',l1:'Persian — Native',l2:'German — B1',l3:'English — Technical',foot:'Open to work · Erlangen · Germany'}};
+let lang=localStorage.getItem('profile-lang')||((navigator.language||'').toLowerCase().startsWith('de')?'de':'en');
+if(lang!=='de'&&lang!=='en')lang='en';
+function apply(){const d=T[lang];document.documentElement.lang=lang;document.querySelectorAll('[data-i]').forEach(el=>{const k=el.getAttribute('data-i');if(d[k]==null)return;if(k==='aboutBody')el.innerHTML=d[k];else el.textContent=d[k]});document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===lang?'true':'false'));const u=new URL(location.href);u.searchParams.set('lang',lang);history.replaceState(null,'',u)}
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{lang=b.dataset.lang;localStorage.setItem('profile-lang',lang);apply()}));
+const q=new URLSearchParams(location.search).get('lang');if(q==='de'||q==='en'){lang=q;localStorage.setItem('profile-lang',lang)}apply();
+</script>
+</body>
+</html>
