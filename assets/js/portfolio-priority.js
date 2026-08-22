@@ -4,14 +4,11 @@
 
     const style = document.createElement('style');
     style.textContent = `
-      /* Recruiter-facing CV CTA */
       #cv-link{min-width:132px;padding:.62rem .82rem;font-size:.72rem;font-weight:700;border-color:rgba(66,199,255,.34);background:linear-gradient(135deg,rgba(66,199,255,.13),rgba(121,237,188,.07));color:#dff7ff;box-shadow:0 8px 24px rgba(0,0,0,.16)}
       #cv-link:before{content:'↓';display:inline-grid;place-items:center;width:19px;height:19px;border-radius:6px;margin-right:6px;border:1px solid rgba(66,199,255,.2);color:#42c7ff;background:rgba(66,199,255,.05)}
       #cv-link:hover{border-color:rgba(66,199,255,.55);box-shadow:0 10px 30px rgba(66,199,255,.11)}
       @media(max-width:900px){#cv-link{min-width:112px;padding:.55rem .65rem;font-size:.66rem}.nav-actions{gap:.35rem}}
       @media(max-width:700px){#cv-link{min-width:108px}.nav-links{display:none}}
-
-      /* VoIP / Unified Communications showcase */
       .voip-operations{width:min(1180px,calc(100% - 2 * var(--pad)));margin:18px auto 0}
       .voip-shell{border:1px solid rgba(121,237,188,.14);border-radius:20px;overflow:hidden;background:linear-gradient(145deg,rgba(7,21,31,.94),rgba(3,10,16,.98));box-shadow:0 22px 80px rgba(0,0,0,.18)}
       .voip-head{display:flex;justify-content:space-between;gap:20px;align-items:end;padding:20px 22px;border-bottom:1px solid rgba(180,215,240,.08)}
@@ -34,7 +31,6 @@
       .voip-proof{padding:12px 15px;border-top:1px solid rgba(180,215,240,.07);display:flex;flex-wrap:wrap;gap:6px;color:#7790a0;font:500 .49rem var(--mono)}
       .voip-proof span{padding:4px 6px;border:1px solid rgba(121,237,188,.11);border-radius:6px;background:rgba(121,237,188,.03)}
       @keyframes voipFlow{to{stroke-dashoffset:-64}}
-      @keyframes voipPacket{0%{transform:translateX(0)}24%{transform:translateX(145px)}42%{transform:translateX(250px)}58%{transform:translateX(385px)}76%{transform:translate(515px,-60px)}100%{transform:translate(595px,60px)}}
       @media(max-width:900px){.voip-details{grid-template-columns:1fr 1fr}.voip-head{align-items:flex-start;flex-direction:column}}
       @media(max-width:620px){.voip-operations{width:min(1180px,calc(100% - 2 * var(--pad)));margin-top:14px}.voip-shell{border-radius:16px}.voip-head{padding:16px}.voip-title{font-size:1.25rem}.voip-details{grid-template-columns:1fr}.voip-map{padding:10px}.voip-svg{min-height:180px}}
     `;
@@ -61,11 +57,10 @@
             <path class="voip-line" d="M255 125 H352 M448 125 H545 M695 125 H710 M710 125 V65 H735 M710 125 V185 H735"/>
             <path class="voip-flow" d="M255 125 H352 M448 125 H545 M695 125 H710 M710 125 V65 H735 M710 125 V185 H735"/>
             <g class="voip-node"><rect x="65" y="83" width="190" height="84" rx="16"/><text x="160" y="112">TEHRAN</text><text x="160" y="131" class="sub">HEAD OFFICE / VOIP SITE</text><text x="160" y="146" class="sub">SIP · WAN · REMOTE USERS</text></g>
-            <g class="voip-node main"><circle cx="400" cy="125" r="48"/><text x="400" y="120">ISSA​BEL</text><text x="400" y="136" class="sub">VIRTUAL PBX</text></g>
+            <g class="voip-node main"><circle cx="400" cy="125" r="48"/><text x="400" y="120">ISSABEL</text><text x="400" y="136" class="sub">VIRTUAL PBX</text></g>
             <g class="voip-node"><rect x="545" y="83" width="150" height="84" rx="16"/><text x="620" y="112">BANDAR ABBAS</text><text x="620" y="131" class="sub">BRANCH / HQ</text><text x="620" y="146" class="sub">SIP / INTERNAL VOICE</text></g>
             <g class="voip-node"><rect x="735" y="36" width="140" height="58" rx="13"/><text x="805" y="60">PORT · CONTAINER</text><text x="805" y="77" class="sub">OPERATIONS VOICE</text></g>
             <g class="voip-node"><rect x="735" y="156" width="140" height="58" rx="13"/><text x="805" y="180">PORT · VEHICLE</text><text x="805" y="197" class="sub">OPERATIONS VOICE</text></g>
-            <circle cx="183" cy="125" r="4" fill="#fff" style="filter:drop-shadow(0 0 6px rgba(255,255,255,.9));animation:voipPacket 4s linear infinite"/>
           </svg>
         </div>
         <div class="voip-details">
