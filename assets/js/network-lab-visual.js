@@ -26,8 +26,8 @@
       await loadScript('assets/js/network-lab-v3.js?v=7');
       await loadScript('assets/js/recruiter-polish.js?v=4');
       await loadScript('assets/js/infrastructure-depth.js?v=3');
-      await loadScript('assets/js/portfolio-priority.js?v=2');
-      await loadScript('assets/js/projects-showcase.js?v=1');
+      await loadScript('assets/js/portfolio-priority.js?v=3');
+      await loadScript('assets/js/projects-showcase.js?v=2');
     } catch (err) {
       console.error('Portfolio enhancement loader failed', err);
     }
