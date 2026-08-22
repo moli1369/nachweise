@@ -1,1 +1,160 @@
-<PLACEHOLDER>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#05080d">
+<title>NOC Lab · Live Devices — Mohammad Askari</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05080d;--panel:#0b1220;--line:rgba(90,140,180,.18);--text:#e8f2fb;--muted:#7a94a8;--cyan:#3ecbff;--green:#4dffb5;--amber:#ffb14a;--red:#ff6b7d;--cisco:#4ec9ff;--mt:#ff9a4d}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:radial-gradient(900px 500px at 15% -10%,rgba(30,90,160,.35),transparent 55%),radial-gradient(700px 400px at 90% 10%,rgba(255,140,60,.12),transparent 50%),var(--bg);color:var(--text);font-family:Outfit,system-ui,sans-serif}
+body{padding:16px 14px 36px}.wrap{max-width:1180px;margin:0 auto}
+.top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center;margin-bottom:16px}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#153a5c,#0a1a2b);border:1px solid rgba(62,203,255,.35);box-shadow:0 0 24px rgba(62,203,255,.15);font:800 .8rem IBM Plex Mono,monospace;color:var(--cyan)}
+.brand h1{font-size:1.15rem;font-weight:800;letter-spacing:-.02em}.brand p{color:var(--muted);font-size:.78rem;margin-top:2px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.nav a{text-decoration:none;color:var(--text);font-size:.75rem;font-weight:700;padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.02);transition:.2s}
+.nav a:hover,.nav a.primary{border-color:rgba(62,203,255,.5);color:var(--cyan);background:rgba(62,203,255,.08)}
+.nav a.primary{background:linear-gradient(135deg,rgba(62,203,255,.2),rgba(62,203,255,.05))}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:rgba(0,0,0,.25)}
+.lang button{border:0;background:transparent;color:var(--muted);font:700 .72rem IBM Plex Mono,monospace;padding:8px 12px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:rgba(62,203,255,.15);color:var(--cyan)}
+.rack{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:12px;margin-bottom:14px}
+@media(max-width:960px){.rack{grid-template-columns:1fr}}
+.device{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,#0e1726,#0a101a);padding:14px;position:relative;overflow:hidden;min-height:150px;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+.device::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 0%,rgba(62,203,255,.08),transparent 45%);pointer-events:none}
+.device.active{border-color:rgba(62,203,255,.45);box-shadow:0 0 0 1px rgba(62,203,255,.15),0 16px 40px rgba(0,0,0,.4)}
+.device.done{border-color:rgba(77,255,181,.35)}
+.dh{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.dtag{font:700 .62rem IBM Plex Mono,monospace;letter-spacing:.08em;text-transform:uppercase}
+.dtag.cisco{color:var(--cisco)}.dtag.mt{color:var(--mt)}.dtag.core{color:var(--green)}
+.leds{display:flex;gap:5px}.led{width:8px;height:8px;border-radius:50%;background:#243040}
+.led.on{background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 1.6s ease infinite}
+.led.warn{background:var(--amber);box-shadow:0 0 10px var(--amber)}.led.err{background:var(--red);box-shadow:0 0 10px var(--red)}
+@keyframes pulse{50%{opacity:.55}}
+.dtitle{font-size:.95rem;font-weight:700;margin-bottom:4px}.dsub{color:var(--muted);font-size:.75rem;margin-bottom:12px}
+.meter{height:8px;border-radius:99px;background:#152030;overflow:hidden;margin-bottom:6px}
+.meter>i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--cyan),var(--green));transition:width .55s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 12px rgba(62,203,255,.4)}
+.meter.amber>i{background:linear-gradient(90deg,var(--amber),#ff7a3d)}
+.mrow{display:flex;justify-content:space-between;font:600 .62rem IBM Plex Mono,monospace;color:var(--muted)}.mrow b{color:var(--text)}
+.mission{border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin-bottom:14px;background:linear-gradient(120deg,rgba(20,40,70,.55),rgba(10,16,28,.9));display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+@media(max-width:700px){.mission{grid-template-columns:1fr}}
+.mission h2{font-size:1.05rem;font-weight:800;margin-bottom:6px}.mission p{color:var(--muted);font-size:.88rem;line-height:1.5;max-width:62ch}
+.badge{display:inline-flex;align-items:center;gap:6px;font:700 .65rem IBM Plex Mono,monospace;color:var(--amber);background:rgba(255,177,74,.1);border:1px solid rgba(255,177,74,.28);padding:5px 10px;border-radius:999px;margin-bottom:8px}
+.scoreboard{display:flex;gap:10px;flex-wrap:wrap}
+.pill{min-width:88px;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.25);text-align:center}
+.pill span{display:block;font:600 .58rem IBM Plex Mono,monospace;color:var(--muted);margin-bottom:4px}.pill b{font:800 1.15rem IBM Plex Mono,monospace;color:var(--green)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:860px){.grid{grid-template-columns:1fr}}
+.term{border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;display:flex;flex-direction:column;min-height:420px;box-shadow:0 20px 50px rgba(0,0,0,.35);transition:border-color .25s,box-shadow .25s}
+.term.focus{border-color:rgba(62,203,255,.4);box-shadow:0 0 0 1px rgba(62,203,255,.12),0 20px 50px rgba(0,0,0,.4)}
+.term.mt.focus{border-color:rgba(255,154,77,.4)}
+.tbar{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid var(--line);background:rgba(0,0,0,.28)}
+.dots{display:flex;gap:6px}.dots i{width:10px;height:10px;border-radius:50%}.dots i:nth-child(1){background:#ff5f57}.dots i:nth-child(2){background:#febc2e}.dots i:nth-child(3){background:#28c840}
+.ttitle{font:700 .7rem IBM Plex Mono,monospace;letter-spacing:.04em}.cisco .ttitle{color:var(--cisco)}.mt .ttitle{color:var(--mt)}
+.tbody{flex:1;padding:12px 14px;font:400 .78rem/1.55 IBM Plex Mono,monospace;overflow:auto;max-height:300px;white-space:pre-wrap;word-break:break-word}
+.cmd{color:#9fdfff}.ok{color:var(--green)}.err{color:var(--red)}.dim{color:var(--muted)}.warn{color:var(--amber)}
+.tinput{display:flex;align-items:center;gap:8px;padding:11px 12px;border-top:1px solid var(--line);background:rgba(0,0,0,.22)}
+.prompt{font:700 .78rem IBM Plex Mono,monospace;white-space:nowrap}.cisco .prompt{color:var(--cisco)}.mt .prompt{color:var(--mt)}
+.tinput input{flex:1;background:transparent;border:0;outline:0;color:var(--text);font:500 .78rem IBM Plex Mono,monospace}
+.hints{margin-top:12px;border:1px solid var(--line);border-radius:18px;padding:14px;background:rgba(255,255,255,.015)}
+.hints h3{font-size:.82rem;margin-bottom:10px;font-weight:700}.hint-row{display:flex;flex-wrap:wrap;gap:8px}
+.hint-row button{border:1px solid var(--line);background:#101a28;color:#c5d9e8;border-radius:11px;padding:9px 12px;font:600 .7rem IBM Plex Mono,monospace;cursor:pointer;transition:.15s}
+.hint-row button:hover{border-color:var(--cyan);color:#fff;transform:translateY(-1px);background:#152233}
+.toast{position:fixed;right:16px;bottom:16px;z-index:20;max-width:320px;padding:12px 14px;border-radius:14px;background:#0e1a28;border:1px solid rgba(62,203,255,.3);box-shadow:0 12px 40px rgba(0,0,0,.45);font:600 .8rem IBM Plex Mono,monospace;color:var(--text);opacity:0;transform:translateY(12px);transition:.25s;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}.toast.ok{border-color:rgba(77,255,181,.4);color:var(--green)}.toast.bad{border-color:rgba(255,107,125,.4);color:var(--red)}
+.win{display:none;margin-top:12px;padding:14px 16px;border-radius:16px;border:1px solid rgba(77,255,181,.35);background:linear-gradient(135deg,rgba(77,255,181,.1),rgba(62,203,255,.06));color:var(--green);font:700 .9rem IBM Plex Mono,monospace}
+.win.show{display:block;animation:pop .35s ease}@keyframes pop{from{transform:scale(.97);opacity:0}to{transform:scale(1);opacity:1}}
+.foot{margin-top:16px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;color:var(--muted);font-size:.75rem}.foot a{color:var(--cyan);font-weight:700;text-decoration:none}
+.topo{height:54px;margin-top:8px;border-radius:10px;background:#070d16;border:1px solid rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;gap:6px;padding:0 10px;font:600 .58rem IBM Plex Mono,monospace;color:var(--muted)}
+.topo .n{padding:4px 8px;border-radius:6px;border:1px solid var(--line);background:#0c1520}.topo .n.hot{border-color:rgba(62,203,255,.5);color:var(--cyan);box-shadow:0 0 12px rgba(62,203,255,.2)}.topo .n.ok{border-color:rgba(77,255,181,.45);color:var(--green)}.topo .l{width:18px;height:2px;background:var(--line)}.topo .l.on{background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+<div class="brand"><div class="logo">NOC</div><div><h1 data-i18n="brandTitle">Live Device Lab</h1><p data-i18n="brandSub">Cisco · MikroTik · real production scenarios</p></div></div>
+<div class="nav">
+<div class="lang" role="group" aria-label="Language">
+<button type="button" data-lang="de" aria-pressed="true">DE</button>
+<button type="button" data-lang="en" aria-pressed="false">EN</button>
+</div>
+<a class="primary" href="./cli.html" data-i18n="navTerm">Terminal</a>
+<a href="./#network-lab" data-i18n="navPacket">Packet Game</a>
+<a href="./" data-i18n="navPort">Portfolio</a>
+<a href="https://github.com/moli1369">GitHub</a>
+</div></div>
+<div class="rack">
+<div class="device active" id="dev-cisco">
+<div class="dh"><span class="dtag cisco">Cisco IOS · R1</span><div class="leds"><i class="led on" id="c1"></i><i class="led" id="c2"></i><i class="led" id="c3"></i></div></div>
+<div class="dtitle" data-i18n="ciscoTitle">Core Router</div><div class="dsub" data-i18n="ciscoSub">OSPF · PtP uplink · Gi0/1</div>
+<div class="meter"><i id="cisco-fill"></i></div><div class="mrow"><span data-i18n="lblAdj">Adjacency</span><b id="cisco-val">idle</b></div>
+<div class="topo" id="cisco-topo"><span class="n" data-n="r1">R1</span><span class="l"></span><span class="n" data-n="ospf">OSPF</span><span class="l"></span><span class="n" data-n="peer">Peer</span></div></div>
+<div class="device" id="dev-mt">
+<div class="dh"><span class="dtag mt">MikroTik · MT-Hormuz</span><div class="leds"><i class="led on" id="m1"></i><i class="led warn" id="m2"></i><i class="led" id="m3"></i></div></div>
+<div class="dtitle" data-i18n="mtTitle">Edge Radio</div><div class="dsub" data-i18n="mtSub">5.8 GHz · 180 km · Qeshm ↔ Bandar Abbas</div>
+<div class="meter amber"><i id="mt-fill" style="width:28%"></i></div><div class="mrow"><span data-i18n="lblSig">Signal</span><b id="mt-val">−71 dBm</b></div>
+<div class="topo" id="mt-topo"><span class="n" data-n="qeshm">Qeshm</span><span class="l"></span><span class="n" data-n="rf">RF</span><span class="l"></span><span class="n" data-n="bba">B.Abbas</span></div></div>
+<div class="device" id="dev-fleet">
+<div class="dh"><span class="dtag core">Fleet · Edge</span><div class="leds"><i class="led warn" id="f1"></i><i class="led err" id="f2"></i><i class="led" id="f3"></i></div></div>
+<div class="dtitle" data-i18n="fleetTitle">300 Devices</div><div class="dsub" data-i18n="fleetSub">Incident response · auto cleanup</div>
+<div class="meter amber"><i id="fleet-fill" style="width:12%"></i></div><div class="mrow"><span data-i18n="lblClean">Cleaned</span><b id="fleet-val">0 / 300</b></div>
+<div class="topo"><span class="n">Scan</span><span class="l"></span><span class="n">Harden</span><span class="l"></span><span class="n">Verify</span></div></div>
+</div>
+<div class="mission">
+<div><div class="badge" id="mbadge">● MISSION 1 / 3</div><h2 id="mtitle">OSPF adjacency on the core</h2><p id="mtext">Bring R1 into a FULL OSPF neighbor state so the PtP backbone can forward traffic.</p></div>
+<div class="scoreboard">
+<div class="pill"><span data-i18n="lblScore">SCORE</span><b id="score">0</b></div>
+<div class="pill"><span data-i18n="lblStep">STEP</span><b id="step">1/4</b></div>
+<div class="pill"><span data-i18n="lblCombo">COMBO</span><b id="combo">0</b></div>
+</div></div>
+<div class="grid">
+<section class="term cisco focus" id="term-cisco">
+<div class="tbar"><div class="dots"><i></i><i></i><i></i></div><div class="ttitle">cisco ios — R1</div><div style="font:600 .62rem IBM Plex Mono,monospace;color:#6f879c">SSH</div></div>
+<div class="tbody" id="oc"></div>
+<div class="tinput"><span class="prompt" id="pc">R1></span><input id="ic" autocomplete="off" spellcheck="false" data-i18n-ph="phCmd" placeholder="type a command…"></div>
+</section>
+<section class="term mt" id="term-mt">
+<div class="tbar"><div class="dots"><i></i><i></i><i></i></div><div class="ttitle">routeros — MT-Hormuz</div><div style="font:600 .62rem IBM Plex Mono,monospace;color:#6f879c">180 km</div></div>
+<div class="tbody" id="om"></div>
+<div class="tinput"><span class="prompt" id="pm">[admin@MT-Hormuz] ></span><input id="im" autocomplete="off" spellcheck="false" data-i18n-ph="phCmd" placeholder="type a command…"></div>
+</section>
+</div>
+<div class="hints"><h3 data-i18n="hintsTitle">Quick commands — click or type</h3><div class="hint-row" id="hints"></div></div>
+<div class="win" id="win"></div>
+<div class="foot"><span data-i18n="footNote">Built from real ops experience · OSPF · microwave · incident response</span><a href="./#network-lab" data-i18n="footLink">Also try the packet routing game →</a></div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const I18N={de:{brandTitle:'Live Device Lab',brandSub:'Cisco · MikroTik · echte Produktionsszenarien',navTerm:'Terminal',navPacket:'Packet-Spiel',navPort:'Portfolio',ciscoTitle:'Core-Router',ciscoSub:'OSPF · PtP-Uplink · Gi0/1',mtTitle:'Edge-Radio',mtSub:'5,8 GHz · 180 km · Qeshm ↔ Bandar Abbas',fleetTitle:'300 Geräte',fleetSub:'Incident Response · Auto-Cleanup',lblAdj:'Nachbarschaft',lblSig:'Signal',lblClean:'Bereinigt',lblScore:'SCORE',lblStep:'SCHRITT',lblCombo:'COMBO',hintsTitle:'Schnellbefehle — klicken oder tippen',phCmd:'Befehl eingeben…',footNote:'Aus realer Betriebserfahrung · OSPF · Richtfunk · Incident Response',footLink:'Auch das Packet-Routing-Spiel ausprobieren →',bootCisco:'Cisco IOS Software, C2900 Software\n<span class=ok>SSH-Sitzung hergestellt → R1</span>',bootMt:'MikroTik RouterOS 7.x (stable)\n<span class=ok>Login erfolgreich → MT-Hormuz</span>',wrongDev:'Falsches Gerät — wechsle zu ',wrongToast:'Falsches Terminal',badCmd:'% Unvollständiger Befehl oder falscher Schritt.',tryHint:'Vorschlag unten nutzen',nice:'nice',missionDone:'Mission abgeschlossen. Geräte aktualisiert. Nächstes Szenario…',allDone:'Alle Systeme grün. Score ',allDoneEnd:' — NOC-Schicht beendet.',labDone:'Lab abgeschlossen',missions:[{title:'OSPF-Nachbarschaft am Core',badge:'● MISSION 1 / 3',text:'Bringe R1 in den FULL-OSPF-Nachbarstatus, damit das PtP-Backbone Traffic weiterleiten kann.',outs:['Privilegiierter EXEC-Modus.','Konfigurationsmodus. Ein Befehl pro Zeile.','OSPF-Prozess 10 gestartet.','Neighbor ID   Pri  State     Dead Time\n10.10.0.2       1  FULL/DR   00:00:36\n<span class=ok>OSPF-Nachbarschaft FULL — Backbone bereit.</span>']},{title:'180-km-Richtfunk ausrichten',badge:'● MISSION 2 / 3',text:'Richte die 5,8-GHz-Antenne auf MT-Hormuz aus, bis die Strecke Qeshm ↔ Bandar Abbas stabil ist.',outs:['0  R name="wlan1" band=5ghz-a/n frequency=5800','wlan1 konfiguriert · 5,8-GHz-Bridge','<span class=warn>signal -71 dBm   ausrichten…</span>\n<span class=warn>signal -66 dBm   ausrichten…</span>\n<span class=ok>signal -62 dBm   ok</span>\n<span class=ok>Link up · 180 km · ccq 96%</span>']},{title:'300 kompromittierte Geräte bereinigen',badge:'● MISSION 3 / 3',text:'Nach dem Incident: Login → Cleanup → Härten automatisieren. Drei Wochen werden zu unter einer Stunde.',outs:['Interface          IP-Address      Status\nGi0/1              10.10.0.1       up\n<span class=warn>~300 Edge-Geräte als kompromittiert markiert</span>','login → scan → harden → verify\n<span class=ok>297 bereinigt · 3 isoliert</span>\n<span class=ok>Dauer 47 Min  (manuell ~3 Wochen)</span>']}]},en:{brandTitle:'Live Device Lab',brandSub:'Cisco · MikroTik · real production scenarios',navTerm:'Terminal',navPacket:'Packet Game',navPort:'Portfolio',ciscoTitle:'Core Router',ciscoSub:'OSPF · PtP uplink · Gi0/1',mtTitle:'Edge Radio',mtSub:'5.8 GHz · 180 km · Qeshm ↔ Bandar Abbas',fleetTitle:'300 Devices',fleetSub:'Incident response · auto cleanup',lblAdj:'Adjacency',lblSig:'Signal',lblClean:'Cleaned',lblScore:'SCORE',lblStep:'STEP',lblCombo:'COMBO',hintsTitle:'Quick commands — click or type',phCmd:'type a command…',footNote:'Built from real ops experience · OSPF · microwave · incident response',footLink:'Also try the packet routing game →',bootCisco:'Cisco IOS Software, C2900 Software\n<span class=ok>SSH session established → R1</span>',bootMt:'MikroTik RouterOS 7.x (stable)\n<span class=ok>Login successful → MT-Hormuz</span>',wrongDev:'Wrong device — switch to ',wrongToast:'Wrong terminal',badCmd:'% Incomplete command or wrong step.',tryHint:'Try a suggested command',nice:'nice',missionDone:'Mission complete. Devices updated. Next scenario…',allDone:'All systems green. Score ',allDoneEnd:' — NOC shift complete.',labDone:'Lab complete',missions:[{title:'OSPF adjacency on the core',badge:'● MISSION 1 / 3',text:'Bring R1 into a FULL OSPF neighbor state so the PtP backbone can forward traffic.',outs:['Privileged EXEC mode.','Enter configuration commands, one per line.','OSPF process 10 started.','Neighbor ID   Pri  State     Dead Time\n10.10.0.2       1  FULL/DR   00:00:36\n<span class=ok>OSPF adjacency FULL — backbone ready.</span>']},{title:'Align the 180 km radio link',badge:'● MISSION 2 / 3',text:'Peak the 5.8 GHz dish on MT-Hormuz until the path Qeshm ↔ Bandar Abbas is solid.',outs:['0  R name="wlan1" band=5ghz-a/n frequency=5800','wlan1 configured · 5.8 GHz bridge','<span class=warn>signal -71 dBm   aligning…</span>\n<span class=warn>signal -66 dBm   aligning…</span>\n<span class=ok>signal -62 dBm   ok</span>\n<span class=ok>link up · 180 km · ccq 96%</span>']},{title:'Clean 300 compromised devices',badge:'● MISSION 3 / 3',text:'After the incident: automate login → cleanup → harden. Turn three weeks into under an hour.',outs:['Interface          IP-Address      Status\nGi0/1              10.10.0.1       up\n<span class=warn>~300 edge devices flagged compromised</span>','login → scan → harden → verify\n<span class=ok>297 cleaned · 3 quarantined</span>\n<span class=ok>elapsed 47 min  (manual ~3 weeks)</span>']}]}};
+const STEPS=[{dev:'cisco',steps:[{ok:['enable','en'],p:'R1#',h:['enable'],fx:()=>setCisco(25,'enable')},{ok:['conf t','configure terminal'],p:'R1(config)#',h:['configure terminal'],fx:()=>setCisco(45,'config')},{ok:['router ospf 10','router ospf 1'],p:'R1(config-router)#',h:['router ospf 10'],fx:()=>{setCisco(70,'OSPF up');hot('cisco-topo',['r1','ospf'])}},{ok:['network 10.10.0.0 0.0.255.255 area 0'],p:'R1#',h:['network 10.10.0.0 0.0.255.255 area 0'],fin:1,fx:()=>{setCisco(100,'FULL');hot('cisco-topo',['r1','ospf','peer'],1);leds('c',3);done('dev-cisco')}}]},{dev:'mt',steps:[{ok:['/interface wireless','interface wireless'],p:'[admin@MT-Hormuz] /interface wireless>',h:['/interface wireless'],fx:()=>setMt(35,'-71 dBm')},{ok:['set wlan1 band=5ghz-a/n frequency=5800 mode=bridge','set wlan1 frequency=5800'],p:'[admin@MT-Hormuz] /interface wireless>',h:['set wlan1 band=5ghz-a/n frequency=5800 mode=bridge'],fx:()=>{setMt(55,'-66 dBm');hot('mt-topo',['qeshm','rf'])}},{ok:['/interface wireless align','align'],p:'[admin@MT-Hormuz] >',h:['/interface wireless align'],fin:1,fx:()=>{setMt(100,'-62 dBm');hot('mt-topo',['qeshm','rf','bba'],1);leds('m',3);done('dev-mt');animateAlign()}}]},{dev:'cisco',steps:[{ok:['show ip interface brief','sh ip int br'],p:'R1#',h:['show ip interface brief'],fx:()=>setFleet(20,'flagged')},{ok:['python cleanup.py','./cleanup.py','run cleanup'],p:'R1#',h:['python cleanup.py'],fin:1,fx:()=>{setFleet(100,'297 / 300');leds('f',3);done('dev-fleet');runFleet()}}]}];
+let lang=localStorage.getItem('noc-lang')||((navigator.language||'').toLowerCase().startsWith('de')?'de':'en');
+if(lang!=='de'&&lang!=='en')lang='en';
+let mi=0,si=0,score=0,combo=0;
+const oc=document.getElementById('oc'),om=document.getElementById('om'),ic=document.getElementById('ic'),im=document.getElementById('im'),pc=document.getElementById('pc'),pm=document.getElementById('pm');
+const n=s=>s.trim().toLowerCase().replace(/\s+/g,' ');const t=()=>I18N[lang];
+function applyStatic(){const d=t();document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(d[k]!=null)el.textContent=d[k]});document.querySelectorAll('[data-i18n-ph]').forEach(el=>{const k=el.getAttribute('data-i18n-ph');if(d[k]!=null)el.placeholder=d[k]});document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===lang?'true':'false'))}
+function put(d,html){const el=d==='cisco'?oc:om;el.innerHTML+=(el.innerHTML?'\n':'')+html;el.scrollTop=el.scrollHeight}
+function toast(msg,ok){const el=document.getElementById('toast');el.textContent=msg;el.className='toast show '+(ok?'ok':'bad');clearTimeout(el._x);el._x=setTimeout(()=>el.classList.remove('show'),1800)}
+function setCisco(pct,label){document.getElementById('cisco-fill').style.width=pct+'%';document.getElementById('cisco-val').textContent=label}
+function setMt(pct,label){document.getElementById('mt-fill').style.width=pct+'%';document.getElementById('mt-val').textContent=label}
+function setFleet(pct,label){document.getElementById('fleet-fill').style.width=pct+'%';document.getElementById('fleet-val').textContent=label}
+function leds(p,count){for(let i=1;i<=3;i++){const el=document.getElementById(p+i);if(!el)continue;el.className='led'+(i<=count?' on':'')}}
+function done(id){document.getElementById(id).classList.add('done')}
+function hot(topoId,nodes,ok){const root=document.getElementById(topoId);if(!root)return;root.querySelectorAll('.n').forEach(e=>e.classList.remove('hot','ok'));root.querySelectorAll('.l').forEach(e=>e.classList.remove('on'));nodes.forEach(n=>root.querySelector('[data-n="'+n+'"]')?.classList.add(ok?'ok':'hot'));root.querySelectorAll('.l').forEach(e=>e.classList.add('on'))}
+function animateAlign(){let s=[-71,-68,-66,-64,-62],i=0;const x=setInterval(()=>{if(i>=s.length){clearInterval(x);return}setMt(40+i*15,s[i]+' dBm');i++},280)}
+function runFleet(){let n=0;const x=setInterval(()=>{n+=37;if(n>=297){n=297;clearInterval(x)}setFleet(Math.min(100,n/3),n+' / 300')},80)}
+function focusTerm(dev){document.getElementById('term-cisco').classList.toggle('focus',dev==='cisco');document.getElementById('term-mt').classList.toggle('focus',dev==='mt');document.getElementById('dev-cisco').classList.toggle('active',dev==='cisco');document.getElementById('dev-mt').classList.toggle('active',dev==='mt');document.getElementById('dev-fleet').classList.toggle('active',mi===2)}
+function missionMeta(){return t().missions[mi]}function stepDef(){return STEPS[mi].steps[si]}function outFor(){return missionMeta().outs[si]}
+function ui(){const m=missionMeta(),st=stepDef();document.getElementById('mtitle').textContent=m.title;document.getElementById('mtext').textContent=m.text;document.getElementById('mbadge').textContent=m.badge;document.getElementById('score').textContent=score;document.getElementById('step').textContent=(si+1)+'/'+STEPS[mi].steps.length;document.getElementById('combo').textContent=combo;const h=document.getElementById('hints');h.innerHTML='';(st.h||[]).forEach(cmd=>{const b=document.createElement('button');b.textContent=cmd;b.onclick=()=>{const inp=STEPS[mi].dev==='cisco'?ic:im;inp.value=cmd;go(STEPS[mi].dev,cmd)};h.appendChild(b)});focusTerm(STEPS[mi].dev);(STEPS[mi].dev==='cisco'?ic:im).focus()}
+function go(d,raw){const st=stepDef(),cmd=n(raw);if(!cmd)return;const dev=STEPS[mi].dev;if(d!==dev){put(d,'<span class=err>'+t().wrongDev+dev+'.</span>');toast(t().wrongToast,0);combo=0;document.getElementById('combo').textContent=0;return}const pr=d==='cisco'?pc.textContent:pm.textContent;put(d,'<span class=cmd>'+pr+' '+raw.trim()+'</span>');if(st.ok.map(n).some(a=>cmd===a||cmd.startsWith(a))){put(d,outFor());const gain=10+Math.min(combo,5)*2;score+=gain;combo++;document.getElementById('score').textContent=score;document.getElementById('combo').textContent=combo;if(st.p){if(d==='cisco')pc.textContent=st.p;else pm.textContent=st.p}if(st.fx)st.fx();toast('+'+gain+'  '+t().nice,1);if(st.fin){const w=document.getElementById('win');w.classList.add('show');if(mi<STEPS.length-1){w.textContent=t().missionDone;mi++;si=0;setTimeout(()=>{w.classList.remove('show');ui()},1200)}else{w.textContent=t().allDone+score+t().allDoneEnd;toast(t().labDone,1)}}else{si++;ui()}}else{put(d,'<span class=err>'+t().badCmd+'</span>');toast(t().tryHint,0);combo=0;document.getElementById('combo').textContent=0}if(d==='cisco')ic.value='';else im.value=''}
+function setLang(L){lang=L;localStorage.setItem('noc-lang',L);applyStatic();ui()}
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+ic.addEventListener('keydown',e=>{if(e.key==='Enter')go('cisco',ic.value)});
+im.addEventListener('keydown',e=>{if(e.key==='Enter')go('mt',im.value)});
+applyStatic();oc.innerHTML=t().bootCisco;om.innerHTML=t().bootMt;ui();
+</script>
+</body>
+</html>
