@@ -11,13 +11,17 @@
   load('assets/js/lab-command-center.js','lab-command-center-js');
 
   const storageKey='portfolio-environment';
-  if(sessionStorage.getItem(storageKey)) return;
+  try {
+    if(sessionStorage.getItem(storageKey)) return;
+  } catch (error) {
+    console.warn('Could not read environment preference:', error);
+  }
 
   const style=document.createElement('style');
   style.textContent=`
     body.environment-lock>*:not(#environment-selector){visibility:hidden}
     #environment-selector{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:auto;padding:22px;background:radial-gradient(circle at 50% 25%,rgba(66,199,255,.13),transparent 33%),linear-gradient(180deg,#030a12,#06111c);color:#edf7ff;font-family:var(--sans,system-ui,sans-serif);-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-    .env-grid{position:absolute;inset:0;opacity:.25;background-image:linear-gradient(rgba(120,200,240,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(120,200,240,.035) 1px,transparent 1px);background-size:42px 42px}
+    .env-grid{position:absolute;inset:0;opacity:.25;background-image:linear-gradient(rgba(120,200,240,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(120,200,240,.035) 1px,transparent 1px);background-size:42px 42px;pointer-events:none}
     .env-shell{position:relative;width:min(1040px,100%);display:grid;gap:18px}
     .env-head{text-align:center}.env-mark{display:inline-grid;place-items:center;width:54px;height:54px;border:1px solid rgba(66,199,255,.35);border-radius:16px;background:rgba(66,199,255,.06);color:#42c7ff;font:600 .8rem var(--mono,monospace);box-shadow:0 0 28px rgba(66,199,255,.14)}
     .env-kicker{margin:13px 0 7px;color:#42c7ff;font:500 .58rem var(--mono,monospace);letter-spacing:.18em;text-transform:uppercase}.env-name{margin:0;color:#d8eaf3;font-size:clamp(1.1rem,2.6vw,1.55rem);font-weight:600}.env-role{margin:5px 0 0;color:#79edbc;font:500 clamp(.66rem,1.4vw,.8rem) var(--mono,monospace);letter-spacing:.08em;text-transform:uppercase}.env-location{margin:6px 0 0;color:#718a9b;font:500 .55rem var(--mono,monospace)}
@@ -41,12 +45,28 @@
   root.querySelector('#env-recommend').textContent=detected==='mobile'?'Detected: MOBILE DEVICE':'Detected: DESKTOP / LAPTOP';
   root.querySelector(`[data-env="${detected}"]`)?.classList.add('recommended');
   let entering=false;
-  const enter=env=>{if(entering)return; entering=true; sessionStorage.setItem(storageKey,env); root.querySelectorAll('.env-card,.env-auto').forEach(el=>{el.disabled=true;el.style.pointerEvents='none'}); root.style.opacity='0';root.style.transition='opacity .18s ease';setTimeout(()=>{document.body.classList.remove('environment-lock');root.remove();window.dispatchEvent(new CustomEvent('portfolio:environment',{detail:{environment:env}}))},180)};
+  const enter=env=>{
+    if(entering)return;
+    entering=true;
+    try {
+      sessionStorage.setItem(storageKey,env);
+    } catch (error) {
+      console.warn('Could not save environment preference:', error);
+    }
+    root.querySelectorAll('.env-card,.env-auto').forEach(el=>{el.disabled=true;el.style.pointerEvents='none'});
+    root.style.opacity='0';
+    root.style.transition='opacity .18s ease';
+    setTimeout(()=>{
+      document.body.classList.remove('environment-lock');
+      root.remove();
+      window.dispatchEvent(new CustomEvent('portfolio:environment',{detail:{environment:env}}));
+    },180);
+  };
   const activate = el => { const env=el?.dataset?.env; if(env) enter(env); };
   root.querySelectorAll('.env-card').forEach(card=>{
     card.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();activate(card);},{capture:true});
     card.addEventListener('pointerup',e=>{if(e.pointerType!=='mouse'){e.preventDefault();e.stopPropagation();activate(card);}},{capture:true});
   });
   root.querySelector('#env-auto').addEventListener('click',e=>{e.preventDefault();e.stopPropagation();enter(detected)},{capture:true});
-  root.addEventListener('click',e=>e.stopPropagation(),true);
+  root.addEventListener('click',e=>e.stopPropagation());
 })();
