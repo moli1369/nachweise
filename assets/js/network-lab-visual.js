@@ -21,7 +21,9 @@
     if (window.__networkVisualBooted) return;
     window.__networkVisualBooted = true;
     try {
+      loadCss('assets/css/lab-command-center.css?v=4');
       loadCss('assets/css/recruiter-refinement.css?v=5');
+      await loadScript('assets/js/lab-command-center.js?v=4');
       loadCss('assets/css/infrastructure-depth.css?v=4');
       await loadScript('assets/js/network-lab-v3.js?v=8');
       await loadScript('assets/js/recruiter-polish.js?v=5');

@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://moli1369.github.io/nachweise/sitemap.xml
