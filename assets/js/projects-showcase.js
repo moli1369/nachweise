@@ -1,14 +1,16 @@
 (() => {
   const PROJECTS = {
     de: [
-      {tag:'Richtfunk / Backhaul',title:'180 km Multipoint: Bandar Abbas → Hajjiabad',text:'Aufbau einer Weitverkehrsverbindung zur انتقال داده von Bandar Abbas bis Hajjiabad über eine Multipoint-Richtfunkarchitektur. Planung der Funkstandorte, Routing und Überwachung der Strecke für die kontinuierliche Datenübertragung.',metrics:[['180 km','Strecke'],['Multipoint','Architektur'],['IP','Backhaul']]},
+      {tag:'Richtfunk / Backhaul',title:'180 km Multipoint: Bandar Abbas → Hajjiabad',text:'Aufbau einer Weitverkehrsverbindung zur Datenübertragung von Bandar Abbas bis Hajjiabad über eine Multipoint-Richtfunkarchitektur. Planung der Funkstandorte, Routing und Überwachung der Strecke für die kontinuierliche Datenübertragung.',metrics:[['180 km','Strecke'],['Multipoint','Architektur'],['IP','Backhaul']]},
       {tag:'Rural Connectivity',title:'Datenversorgung für abgelegene Standorte im Raum Bandar Abbas',text:'Planung und Umsetzung von Datenverbindungen für Genu, Sarzeh, Rezvan, Fin und Siahú/Tang sowie weitere ländliche Standorte. Ziel war die zuverlässige Anbindung entfernter Standorte an die zentrale Infrastruktur.',metrics:[['5+','Standorte'],['Wireless','Backhaul'],['WAN','Connectivity']]},
       {tag:'VLAN + Wireless',title:'Bandar Abbas → Bastak: VLAN-Transport über Mimosa',text:'Übertragung von Daten aus Bandar Abbas zu Standorten im Raum Bastak über VLAN-basierte Netzarchitektur und Mimosa-Richtfunk. Layer-2/Layer-3-Übergänge, Routing und Funkstrecken für den verteilten Betrieb.',metrics:[['VLAN','Transport'],['Mimosa','Radio'],['WAN','Backhaul']]},
       {tag:'Hotspot / Wireless',title:'Hotspot-Infrastruktur im Thermalbad Genu',text:'Konzeption und Aufbau einer Hotspot-Lösung für das Genu Thermalbad, inklusive Wireless-Abdeckung, Netzwerksegmentierung und kontrolliertem Internetzugang für Besucher.',metrics:[['Wi-Fi','Coverage'],['Hotspot','Access'],['Network','Segmentation']]},
       {tag:'VoIP / Issabel',title:'Virtuelle VoIP-Infrastruktur für mehrere Standorte',text:'Aufbau und Virtualisierung einer VoIP-Infrastruktur mit Issabel für Fardad Azarakhsh und Pejam Gulf. Standortübergreifende Telefonie zwischen Tehran, Bandar Abbas und den Port Operations — einschließlich der getrennten Container- und Vehicle-Bereiche am Terminal.',metrics:[['Issabel','PBX'],['SIP','VoIP'],['Multi-site','Telephony']]},
       {tag:'Incident Response',title:'300 kompromittierte Netzwerkgeräte automatisiert bereinigt',text:'Nach einem Sicherheitsvorfall Entwicklung eines Python-Workflows für automatisierte Anmeldung, Bereinigung und Härtung von rund 300 Geräten — statt einer manuellen Bearbeitung über mehrere Wochen.',metrics:[['~300','Geräte'],['< 1 h','Automatisierung'],['Python','Remediation']]},
       {tag:'Virtualisierung',title:'Proxmox Cluster mit Ceph & High Availability',text:'Aufbau einer virtualisierten Cluster-Infrastruktur mit Proxmox VE, Ceph Distributed Storage und High Availability. Fokus auf Quorum, Failover und stabilem Betrieb von virtuellen Workloads.',metrics:[['Ceph','Storage'],['HA','Failover'],['Cluster','Proxmox']]},
-      {tag:'Industrial IT',title:'SIMATIC / WinCC auf virtualisierter Plattform',text:'Virtualisierung und Absicherung Windows-basierter SIMATIC- und WinCC-Systeme für industrielle Container-Umschlagfahrzeuge und Überführung auf standardisierte Hardware.',metrics:[['80 t','Fahrzeuge'],['SCADA','WinCC'],['Virtual','Platform']]}
+      {tag:'Industrial IT',title:'SIMATIC / WinCC auf virtualisierter Plattform',text:'Virtualisierung und Absicherung Windows-basierter SIMATIC- und WinCC-Systeme für industrielle Container-Umschlagfahrzeuge und Überführung auf standardisierte Hardware.',metrics:[['80 t','Fahrzeuge'],['SCADA','WinCC'],['Virtual','Platform']]},
+      {tag:'Web & Apps',title:'Taxi-Buchungssystem Esfandiari Taxi',text:'Design und Entwicklung eines kompletten Buchungssystems für taxibaiersdorf.com: responsive Website, zwei Android-Apps für Fahrgäste und Fahrer sowie ein zentraler Verwaltungsbereich. Fahrgäste bestellen per GPS oder manueller Adresse, Fahrer verwalten Verfügbarkeit und Fahrten.',metrics:[['2','Android-Apps'],['3','Plattformen'],['Web','Buchungssystem']]},
+      {tag:'Webdesign',title:'Fotografie-Portfolio Photos By Armita',text:'Responsives Portfolio mit thematischen Galerien, Leistungsübersicht und Kontaktformular für photobyarmita.com — eigene Domain, Spam-Schutz für das Formular, optimierte Bilddarstellung, Ladezeiten und Suchmaschinen-Sichtbarkeit.',metrics:[['SEO','optimiert'],['100 %','handgeschrieben'],['Web','Portfolio']]}
     ],
     en: [
       {tag:'Microwave / Backhaul',title:'180 km Multipoint: Bandar Abbas → Hajjiabad',text:'Built a long-distance data backhaul from Bandar Abbas to Hajjiabad using a multipoint microwave architecture. Covered radio-site planning, routing and monitoring for continuous production connectivity.',metrics:[['180 km','distance'],['Multipoint','architecture'],['IP','backhaul']]},
@@ -18,7 +20,9 @@
       {tag:'VoIP / Issabel',title:'Virtual multi-site VoIP infrastructure',text:'Built and virtualised an Issabel-based VoIP platform for Fardad Azarakhsh and Pejam Gulf. Connected Tehran, Bandar Abbas and port operations, including separate container and vehicle operational areas at the terminal.',metrics:[['Issabel','PBX'],['SIP','VoIP'],['Multi-site','telephony']]},
       {tag:'Incident Response',title:'Automated remediation of ~300 compromised network devices',text:'After a security incident, developed a Python workflow for automated login, cleanup and hardening of around 300 devices instead of handling the remediation manually over several weeks.',metrics:[['~300','devices'],['< 1 h','automation'],['Python','remediation']]},
       {tag:'Virtualisation',title:'Proxmox cluster with Ceph & High Availability',text:'Built clustered infrastructure with Proxmox VE, Ceph distributed storage and High Availability, focusing on quorum, failover and stable production workloads.',metrics:[['Ceph','storage'],['HA','failover'],['Cluster','Proxmox']]},
-      {tag:'Industrial IT',title:'SIMATIC / WinCC on a virtualised platform',text:'Virtualised and hardened Windows-based SIMATIC and WinCC systems for industrial container-handling vehicles, then moved them to standardised hardware.',metrics:[['80 t','vehicles'],['SCADA','WinCC'],['Virtual','platform']]}
+      {tag:'Industrial IT',title:'SIMATIC / WinCC on a virtualised platform',text:'Virtualised and hardened Windows-based SIMATIC and WinCC systems for industrial container-handling vehicles, then moved them to standardised hardware.',metrics:[['80 t','vehicles'],['SCADA','WinCC'],['Virtual','platform']]},
+      {tag:'Web & Apps',title:'Esfandiari Taxi booking system',text:'Designed and developed a complete booking system for taxibaiersdorf.com: a responsive website, two Android apps for passengers and drivers and a central administration area. Passengers book by GPS or manual address, drivers manage availability and rides.',metrics:[['2','Android apps'],['3','platforms'],['Web','booking system']]},
+      {tag:'Web design',title:'Photography portfolio Photos By Armita',text:'A responsive portfolio with themed galleries, a service overview and a contact form for photobyarmita.com — custom domain, spam protection on the form, optimised image display, loading times and search-engine visibility.',metrics:[['SEO','optimised'],['100 %','hand-coded'],['Web','portfolio']]}
     ]
   };
 
@@ -33,10 +37,9 @@
       const open=()=>{
         const p=items[Number(card.dataset.showcaseProject)];
         const modal=document.querySelector('#modal');
-        if(!modal)return;
-        document.querySelector('#modal-kicker').textContent=p.tag;
-        document.querySelector('#modal-title').textContent=p.title;
-        document.querySelector('#modal-body').innerHTML=`<div class="modal-content"><p>${esc(p.text)}</p><div class="modal-proof">${p.metrics.map(([v,l])=>`<span>${esc(v)} · ${esc(l)}</span>`).join('')}</div></div>`;
+        const content=document.querySelector('#modal-content');
+        if(!modal||!content)return;
+        content.innerHTML=`<div class="modal-kicker">${esc(p.tag)}</div><h2 id="modal-title">${esc(p.title)}</h2><div class="modal-content"><p>${esc(p.text)}</p><div class="modal-proof">${p.metrics.map(([v,l])=>`<span>${esc(v)} · ${esc(l)}</span>`).join('')}</div></div>`;
         modal.hidden=false; document.body.style.overflow='hidden'; document.querySelector('#modal-close')?.focus();
       };
       card.addEventListener('click',open); card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
