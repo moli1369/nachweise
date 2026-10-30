@@ -140,7 +140,21 @@ const PROJEKTE = [
           zahlen: [["80 t", "Fahrzeugklasse"], ["SCADA", "Umfeld"]] },
     en: { tag: "Industrial IT", titel: "Virtualising SIMATIC and WinCC control systems",
           text: "Virtualised and hardened Windows-based control systems for 80-tonne container handling vehicles, then commissioned them on off-the-shelf mini-PCs.",
-          zahlen: [["80 t", "vehicle class"], ["SCADA", "environment"]] } }
+          zahlen: [["80 t", "vehicle class"], ["SCADA", "environment"]] } },
+
+  { de: { tag: "Web & Apps", titel: "Taxi-Buchungssystem Esfandiari Taxi",
+          text: "Design und Entwicklung eines kompletten Buchungssystems für taxibaiersdorf.com: responsive Website, zwei Android-Apps für Fahrgäste und Fahrer sowie ein zentraler Verwaltungsbereich. Fahrgäste bestellen per GPS oder manueller Adresse, Fahrer verwalten Verfügbarkeit und Fahrten.",
+          zahlen: [["2", "Android-Apps"], ["3", "Plattformen"]] },
+    en: { tag: "Web & Apps", titel: "Esfandiari Taxi booking system",
+          text: "Designed and developed a complete booking system for taxibaiersdorf.com: a responsive website, two Android apps for passengers and drivers and a central administration area. Passengers book by GPS or manual address, drivers manage availability and rides.",
+          zahlen: [["2", "Android apps"], ["3", "platforms"]] } },
+
+  { de: { tag: "Webdesign", titel: "Fotografie-Portfolio Photos By Armita",
+          text: "Responsives Portfolio mit thematischen Galerien, Leistungsübersicht und Kontaktformular für photobyarmita.com — eigene Domain, Spam-Schutz für das Formular, optimierte Bilddarstellung, Ladezeiten und Suchmaschinen-Sichtbarkeit.",
+          zahlen: [["SEO", "optimiert"], ["100 %", "handgeschrieben"]] },
+    en: { tag: "Web design", titel: "Photography portfolio Photos By Armita",
+          text: "A responsive portfolio with themed galleries, a service overview and a contact form for photobyarmita.com — custom domain, spam protection on the form, optimised image display, loading times and search-engine visibility.",
+          zahlen: [["SEO", "optimised"], ["100 %", "hand-coded"]] } }
 ];
 
 const STATIONEN = [
@@ -208,10 +222,12 @@ const TAFELN = {
   profil: {
     de: { marke: "Profil", titel: "Systemadministrator mit über zehn Jahren Praxis", art: "text",
           text: ["Aufbau, Betrieb und Absicherung von Netzwerk- und Serverinfrastrukturen in ISP-, Unternehmens- und Industrieumgebungen. Schwerpunkte sind Virtualisierung, Windows Server mit Active Directory, Linux-Administration, Netzwerktechnik und Monitoring.",
+                 "Ergänzend entwickle ich responsive Websites und Android-Apps — zuletzt das Taxi-Buchungssystem taxibaiersdorf.com und das Fotografie-Portfolio photobyarmita.com.",
                  "Seit Januar 2026 in Deutschland mit gültigem Aufenthaltstitel und uneingeschränkter Arbeitserlaubnis. Kurzfristig verfügbar und bundesweit umzugsbereit.",
                  "Diese Seite ergänzt meinen Lebenslauf um die Nachweise und Projektbeschreibungen, für die dort kein Platz war."] },
     en: { marke: "Profile", titel: "System Administrator with over ten years of practice", art: "text",
           text: ["Designing, operating and securing network and server infrastructures across ISP, enterprise and industrial environments. The focus is virtualisation, Windows Server with Active Directory, Linux administration, networking and monitoring.",
+                 "In addition, I build responsive websites and Android apps — most recently the taxi booking system taxibaiersdorf.com and the photography portfolio photobyarmita.com.",
                  "In Germany since January 2026 with a valid residence permit and unrestricted work authorisation. Available at short notice and willing to relocate nationwide.",
                  "This page supplements my CV with the credentials and project descriptions there was no room for."] }
   },
@@ -249,11 +265,11 @@ const TAFELN = {
     de: { marke: "Sprachen", titel: "Sprachen", art: "paar",
           paare: [["Persisch", "Muttersprache"],
                   ["Deutsch", "B1"],
-                  ["Englisch", "Technisches Leseverständnis (Fachdokumentation)"]] },
+                  ["Englisch", "Mittlere Konversation, technisches Leseverständnis"]] },
     en: { marke: "Languages", titel: "Languages", art: "paar",
           paare: [["Persian", "Native language"],
                   ["German", "B1"],
-                  ["English", "Technical reading comprehension (documentation)"]] }
+                  ["English", "Intermediate spoken communication, technical reading comprehension"]] }
   },
   konsole: {
     de: { marke: "Konsole", titel: "Zwei Sitzungen beim Einpegeln der Strecke", art: "konsole",
