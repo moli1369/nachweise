@@ -83,3 +83,10 @@ main>.section{scroll-margin-top:100px;}
 }
 @media(max-width:350px){#top .hero-actions{grid-template-columns:1fr;}}
 @media(prefers-reduced-motion:reduce){#projects .project-card{transition:none!important;}#projects .project-card:hover{transform:none!important;}}
+
+/* Compact independent project actions, including the HTML fallback. */
+#projects .project-card a.project-link{display:inline-flex!important;position:relative!important;inset:auto!important;align-items:center!important;justify-content:center!important;width:auto!important;max-width:100%!important;min-width:0!important;min-height:36px!important;height:auto!important;flex:0 0 auto!important;padding:7px 10px!important;margin:12px 8px 0 0!important;border:1px solid rgba(66,199,255,.32)!important;border-radius:7px!important;background:transparent!important;color:#8cdbff!important;box-shadow:none!important;font:600 .73rem/1.4 var(--sans,system-ui)!important;letter-spacing:0!important;white-space:normal!important;text-decoration:none!important;vertical-align:middle!important;transform:none!important;}
+#projects .project-card a.project-link[href="taxi-projekt.html"],#projects .project-card a.project-link[href="fotografie-projekt.html"]{background:rgba(66,199,255,.09)!important;color:#bceaff!important;}
+#projects .project-card a.project-link:hover{border-color:#64ceff!important;background:rgba(66,199,255,.14)!important;}
+#projects .project-card a.project-link:focus-visible{outline:2px solid #6fe5ae!important;outline-offset:3px!important;}
+#projects .project-card a.project-link::after{content:none!important;}
