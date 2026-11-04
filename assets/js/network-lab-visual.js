@@ -1,4 +1,22 @@
 (() => {
+  const taxiProjectLink = () => {
+    const section = document.getElementById('projects');
+    if (!section) return;
+    let link = document.getElementById('taxi-case-study-link');
+    if (!link) {
+      link = document.createElement('a');
+      link.id = 'taxi-case-study-link';
+      link.className = 'btn btn-outline';
+      link.href = 'taxi-projekt.html';
+      link.style.marginTop = '18px';
+      link.style.minHeight = '44px';
+      const grid = section.querySelector('#project-grid');
+      if (grid && grid.parentElement === section) section.insertBefore(link, grid);
+      else section.appendChild(link);
+    }
+    const english = document.documentElement.lang.toLowerCase().startsWith('en');
+    link.textContent = english ? 'Taxi case study (German) ↗' : 'Taxi-Projekt ansehen ↗';
+  };
   const modernTypography = () => {
     if (!document.getElementById('portfolio-inter-font')) {
       const link = document.createElement('link');
@@ -22,6 +40,7 @@
     }
   };
   const compactCv = () => {
+    taxiProjectLink();
     document.querySelectorAll('#recruiter-cv-bar,#hero-cv-download,#recruiter-cv-style').forEach(el => el.remove());
     if (!document.getElementById('compact-cv-style')) {
       const style = document.createElement('style');
