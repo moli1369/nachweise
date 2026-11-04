@@ -12,7 +12,7 @@
           .nav .brand strong{font-size:.68rem;line-height:1.3;white-space:normal;overflow-wrap:anywhere}
           .nav .brand small{display:none}
           .nav .nav-actions{width:auto!important;flex:0 0 auto;gap:5px!important}
-          .nav-actions #cv-link{display:inline-flex!important;flex:0 0 auto!important;width:auto!important;min-width:0!important;min-height:36px!important;padding:7px 9px!important;font-size:.66rem!important;line-height:1.2!important;box-shadow:none!important;border:1px solid rgba(66,199,255,.4)!important;background:rgba(66,199,255,.1)!important;color:#dff7ff!important}
+          .nav-actions #cv-link{display:inline-flex!important;flex:0 0 auto!important;width:auto!important;min-width:0!important;min-height:40px!important;padding:8px 11px!important;font-size:.74rem!important;line-height:1.2!important;box-shadow:none!important;border:1px solid rgba(66,199,255,.4)!important;background:rgba(66,199,255,.1)!important;color:#dff7ff!important}
           .nav-actions #cv-link:before{display:none!important}
           .nav-actions .lang button{min-width:32px!important;min-height:36px!important;padding:7px!important;font-size:.62rem}
         }`;
