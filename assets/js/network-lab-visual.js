@@ -1,4 +1,26 @@
 (() => {
+  const modernTypography = () => {
+    if (!document.getElementById('portfolio-inter-font')) {
+      const link = document.createElement('link');
+      link.id = 'portfolio-inter-font';
+      link.rel = 'stylesheet';
+      link.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap';
+      document.head.appendChild(link);
+    }
+    if (!document.getElementById('portfolio-typography')) {
+      const style = document.createElement('style');
+      style.id = 'portfolio-typography';
+      style.textContent = `
+        :root{--sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif}
+        body{font-family:var(--sans)!important}
+        h1,h2,h3,h4,.hero-lead,.brand strong,.btn,.form-field input,.form-field textarea{font-family:var(--sans)!important}
+        h1,h2,h3,h4{text-wrap:balance}
+        h1,h2{font-weight:700}
+        .hero-lead{text-wrap:pretty}
+      `;
+      document.head.appendChild(style);
+    }
+  };
   const compactCv = () => {
     document.querySelectorAll('#recruiter-cv-bar,#hero-cv-download,#recruiter-cv-style').forEach(el => el.remove());
     if (!document.getElementById('compact-cv-style')) {
@@ -44,6 +66,7 @@
   const boot = async () => {
     if (window.__networkVisualBooted) return;
     window.__networkVisualBooted = true;
+    modernTypography();
     compactCv();
     new MutationObserver(compactCv).observe(document.documentElement, {attributes:true,attributeFilter:['lang']});
     try {
