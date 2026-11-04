@@ -1,42 +1,29 @@
 (() => {
-  const ensureCv = () => {
-    if (!document.getElementById('recruiter-cv-style')) {
+  const compactCv = () => {
+    document.querySelectorAll('#recruiter-cv-bar,#hero-cv-download,#recruiter-cv-style').forEach(el => el.remove());
+    if (!document.getElementById('compact-cv-style')) {
       const style = document.createElement('style');
-      style.id = 'recruiter-cv-style';
+      style.id = 'compact-cv-style';
       style.textContent = `
-        #recruiter-cv-bar{display:none}
-        #hero-cv-download{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 18px;border-radius:10px;background:#42c7ff;color:#02111b;font:700 15px/1.4 system-ui,sans-serif;text-decoration:none;box-sizing:border-box}
-        #hero-cv-download:focus-visible,#recruiter-cv-bar a:focus-visible{outline:3px solid #fff;outline-offset:3px}
         @media(max-width:700px){
-          body{padding-bottom:calc(86px + env(safe-area-inset-bottom,0px))!important}
-          #hero-cv-download{width:100%;order:-1}
-          #recruiter-cv-bar{display:flex!important;position:fixed!important;inset:auto 0 0!important;z-index:2147483647!important;gap:10px;align-items:center;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:#07101c;border-top:1px solid #42c7ff;box-shadow:0 -6px 24px rgba(0,0,0,.3);box-sizing:border-box}
-          #recruiter-cv-bar a{display:flex!important;align-items:center;justify-content:center;width:100%;min-height:48px;border-radius:10px;background:#42c7ff;color:#02111b;font:700 15px/1.4 system-ui,sans-serif;text-decoration:none;padding:10px 14px;box-sizing:border-box}
-        }` ;
+          .nav{flex-wrap:nowrap!important;gap:8px!important}
+          .nav .brand{flex:1 1 auto!important;min-width:0!important;gap:6px}
+          .nav .brand-mark{width:30px;height:30px;flex-shrink:0}
+          .nav .brand strong{font-size:.68rem;line-height:1.3;white-space:normal;overflow-wrap:anywhere}
+          .nav .brand small{display:none}
+          .nav .nav-actions{width:auto!important;flex:0 0 auto;gap:5px!important}
+          .nav-actions #cv-link{display:inline-flex!important;flex:0 0 auto!important;width:auto!important;min-width:0!important;min-height:36px!important;padding:7px 9px!important;font-size:.66rem!important;line-height:1.2!important;box-shadow:none!important;border:1px solid rgba(66,199,255,.4)!important;background:rgba(66,199,255,.1)!important;color:#dff7ff!important}
+          .nav-actions #cv-link:before{display:none!important}
+          .nav-actions .lang button{min-width:32px!important;min-height:36px!important;padding:7px!important;font-size:.62rem}
+        }`;
       document.head.appendChild(style);
     }
-    if (!document.getElementById('recruiter-cv-bar')) {
-      const bar = document.createElement('div');
-      bar.id = 'recruiter-cv-bar';
-      const link = document.createElement('a');
-      link.dataset.recruiterCv = 'true';
-      link.setAttribute('download', '');
-      bar.appendChild(link);
-      document.body.appendChild(bar);
+    const link = document.getElementById('cv-link');
+    if (link && matchMedia('(max-width:700px)').matches) {
+      const english = document.documentElement.lang.toLowerCase().startsWith('en');
+      link.textContent = english ? 'CV ↓' : 'Lebenslauf ↓';
+      link.setAttribute('aria-label', english ? 'Download CV (PDF)' : 'Lebenslauf herunterladen (PDF)');
     }
-    const actions = document.querySelector('.hero-actions');
-    if (actions && !document.getElementById('hero-cv-download')) {
-      const link = document.createElement('a');
-      link.id = 'hero-cv-download';
-      link.dataset.recruiterCv = 'true';
-      link.setAttribute('download', '');
-      actions.prepend(link);
-    }
-    const english = document.documentElement.lang.toLowerCase().startsWith('en');
-    document.querySelectorAll('[data-recruiter-cv]').forEach(link => {
-      link.href = english ? 'assets/docs/CV_Mohammad_Askari_Dehestani_EN.pdf' : 'assets/docs/Lebenslauf_Mohammad_Askari_Dehestani.pdf';
-      link.textContent = english ? 'Download CV (PDF) ↓' : 'Lebenslauf herunterladen (PDF) ↓';
-    });
   };
   const loadScript = (src) => new Promise((resolve, reject) => {
     const s = document.createElement('script');
@@ -57,8 +44,8 @@
   const boot = async () => {
     if (window.__networkVisualBooted) return;
     window.__networkVisualBooted = true;
-    ensureCv();
-    new MutationObserver(ensureCv).observe(document.documentElement, {attributes:true,attributeFilter:['lang']});
+    compactCv();
+    new MutationObserver(compactCv).observe(document.documentElement, {attributes:true,attributeFilter:['lang']});
     try {
       loadCss('assets/css/lab-command-center.css?v=4');
       loadCss('assets/css/recruiter-refinement.css?v=5');
@@ -73,7 +60,7 @@
     } catch (err) {
       console.error('Portfolio enhancement loader failed', err);
     } finally {
-      ensureCv();
+      compactCv();
     }
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
