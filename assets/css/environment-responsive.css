@@ -38,3 +38,15 @@
   #environment-selector .env-auto{width:100% !important;max-width:none !important;box-sizing:border-box !important;padding:11px 13px !important;}
   #environment-selector .env-foot{font-size:.48rem !important;line-height:1.4 !important;}
 }
+
+/* Keep the CV download accessible on mobile without crowding the brand. */
+@media(max-width:700px){
+  .nav{flex-wrap:wrap;gap:.65rem;}
+  .nav .brand{flex:1 1 100%;}
+  .nav .brand>span:last-child{min-width:0;}
+  .nav .brand strong,.nav .brand small{white-space:normal;overflow-wrap:anywhere;}
+  .nav .nav-actions{width:100%;gap:.65rem;}
+  .nav-actions #cv-link{display:inline-flex;flex:1;min-height:44px;padding:.7rem 1rem;background:linear-gradient(135deg,#45c9ff,#238cff);border-color:transparent;color:#02111b;font-size:.8rem;}
+  .nav-actions .lang{flex-shrink:0;}
+  .nav-actions .lang button{min-width:44px;min-height:44px;}
+}
