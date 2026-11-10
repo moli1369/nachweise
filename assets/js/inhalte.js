@@ -10,25 +10,19 @@ const UI = {
   de: {
     "skip": "Zu den Inhalten springen",
     "kopf.rolle": "Systemadministrator · Netzwerk & IT-Infrastruktur · Erlangen",
-    "kopf.cv": "Lebenslauf",
     "hinweis": "Auf die Anlagenteile tippen — die Angaben öffnen sich als Tafel.",
     "fuss.kontakt": "Kontakt",
     "zu": "Schließen",
     "ansehen": "Ansehen",
-    "alle": "Alle Nachweise als eine PDF",
-    "cv.datei": "assets/docs/Lebenslauf_Mohammad_Askari_Dehestani.pdf",
     "szene.alt": "Gemalte Szene: ein Funkmast im Morgenlicht, ein Monteur richtet eine Antenne aus, ein Techniker prüft die Signalstärke, daneben ein Servicefahrzeug, ein Kabelgraben und ein Technikraum mit Rack."
   },
   en: {
     "skip": "Skip to the content",
     "kopf.rolle": "System Administrator · Network & IT Infrastructure · Erlangen",
-    "kopf.cv": "CV",
     "hinweis": "Tap the parts of the installation — the details open as a panel.",
     "fuss.kontakt": "Contact",
     "zu": "Close",
     "ansehen": "View",
-    "alle": "All credentials in one PDF",
-    "cv.datei": "assets/docs/CV_Mohammad_Askari_Dehestani_EN.pdf",
     "szene.alt": "A painted scene: a radio tower in morning light, a rigger aligning an antenna, a technician checking signal strength, a service van, a cable trench and a technical room with a rack."
   }
 };
@@ -40,7 +34,7 @@ const UI = {
    becomes meaningful once it was applied in production. */
 
 const NACHWEISE = [
-  { datei: "azure-administration.pdf", anbieter: "TOSINSO", jahr: "Oktober 2023",
+  { anbieter: "TOSINSO", jahr: "Oktober 2023",
     de: { titel: "Microsoft Azure Administration", umfang: "Nr. TCN-0005439",
           inhalt: "Verwaltung von Identitäten, virtuellen Netzwerken, Speicherkonten und virtuellen Maschinen in Azure, dazu Backup und Überwachung.",
           praxis: "Entspricht dem AZ-104-Stoff; die Prüfung lege ich in Deutschland ab. Aufbauend auf acht Jahren Windows-Server- und Virtualisierungsbetrieb." },
@@ -48,7 +42,7 @@ const NACHWEISE = [
           inhalt: "Managing identities, virtual networks, storage accounts and virtual machines in Azure, plus backup and monitoring.",
           praxis: "Matches the AZ-104 syllabus; I am taking the exam in Germany. Built on eight years of Windows Server and virtualisation work." } },
 
-  { datei: "azure-fundamentals.pdf", anbieter: "TOSINSO", jahr: "Oktober 2023",
+  { anbieter: "TOSINSO", jahr: "Oktober 2023",
     de: { titel: "Microsoft Azure Fundamentals", umfang: "Nr. TCN-0005438",
           inhalt: "Cloud-Grundlagen, Servicemodelle, Azure-Kernressourcen, Kostenmodelle und Governance.",
           praxis: "Im selben Zug wie die Azure-Administration abgeschlossen, als Einstieg in die Cloud-Themen." },
@@ -56,7 +50,7 @@ const NACHWEISE = [
           inhalt: "Cloud concepts, service models, core Azure resources, pricing models and governance.",
           praxis: "Completed alongside Azure Administration as an entry point into the cloud topics." } },
 
-  { datei: "mcsa-windows-server.pdf", anbieter: "TOSINSO", jahr: "Mai 2023",
+  { anbieter: "TOSINSO", jahr: "Mai 2023",
     de: { titel: "MCSA Windows Server 2022", umfang: "Nr. TCN-0004102",
           inhalt: "Active Directory, Gruppenrichtlinien, DNS und DHCP, IIS, Dateidienste, Failover und Serverhärtung.",
           praxis: "Systematische Auffrischung neben dem laufenden Betrieb: Active Directory, GPO, IIS und FTP administriere ich seit 2017 im Produktivbetrieb." },
@@ -64,7 +58,7 @@ const NACHWEISE = [
           inhalt: "Active Directory, Group Policy, DNS and DHCP, IIS, file services, failover and server hardening.",
           praxis: "A systematic refresher alongside daily work: I have administered Active Directory, GPO, IIS and FTP in production since 2017." } },
 
-  { datei: "lpic-2.pdf", anbieter: "TOSINSO", jahr: "Mai 2023",
+  { anbieter: "TOSINSO", jahr: "Mai 2023",
     de: { titel: "LPIC 2 — Linux Engineer", umfang: "Nr. TCN-0004153",
           inhalt: "Kernel, Dateisysteme, Netzwerkdienste, Systemwartung, Fehlersuche und Absicherung im Serverbetrieb.",
           praxis: "Vertiefung der Praxis aus dem Betrieb von Ubuntu-, CentOS- und Debian-Servern seit 2015, einschließlich SSH-basierter Backups und Samba." },
@@ -72,7 +66,7 @@ const NACHWEISE = [
           inhalt: "Kernel, file systems, network services, system maintenance, troubleshooting and hardening in server operation.",
           praxis: "Deepened the practice from running Ubuntu, CentOS and Debian servers since 2015, including SSH-based backups and Samba." } },
 
-  { datei: "lpic-1.pdf", anbieter: "TOSINSO", jahr: "Mai 2023",
+  { anbieter: "TOSINSO", jahr: "Mai 2023",
     de: { titel: "LPIC 1 — Linux Administrator", umfang: "Nr. TCN-0004152",
           inhalt: "Systemarchitektur, Paketverwaltung, Dateisysteme, Shell-Scripting sowie Benutzer- und Rechteverwaltung.",
           praxis: "Formalisierung der täglichen Linux-Arbeit; die Inhalte waren zu diesem Zeitpunkt bereits mehrjährige Routine." },
@@ -80,7 +74,7 @@ const NACHWEISE = [
           inhalt: "System architecture, package management, file systems, shell scripting, user and permission management.",
           praxis: "Formalised the daily Linux work; by then the material had been routine for several years." } },
 
-  { datei: "linux-essentials.pdf", anbieter: "TOSINSO", jahr: "Mai 2023",
+  { anbieter: "TOSINSO", jahr: "Mai 2023",
     de: { titel: "LPI Linux Essentials", umfang: "Nr. TCN-0004151",
           inhalt: "Grundlagen von Linux und quelloffener Software, Kommandozeile, Dateiverwaltung und einfache Skripte.",
           praxis: "Einstiegsstufe der LPI-Reihe, gemeinsam mit LPIC 1 und LPIC 2 abgeschlossen." },
@@ -88,7 +82,7 @@ const NACHWEISE = [
           inhalt: "Linux and open source fundamentals, the command line, file management and basic scripting.",
           praxis: "The entry level of the LPI track, completed together with LPIC 1 and LPIC 2." } },
 
-  { datei: "ccna.pdf", anbieter: "Maktabkhooneh", jahr: "Mai 2023",
+  { anbieter: "Maktabkhooneh", jahr: "Mai 2023",
     de: { titel: "Cisco CCNA 200-301", umfang: "58 Stunden · Nr. MK-PECLJ0",
           inhalt: "TCP/IP, Subnetting, VLAN, Spanning Tree, statisches und dynamisches Routing mit OSPF, Zugriffslisten und NAT.",
           praxis: "Ordnet die Routing-Praxis systematisch: OSPF im ISP-Umfeld über mehrere Städte betreibe ich seit 2015, dazu MPLS und VPLS." },
@@ -96,7 +90,7 @@ const NACHWEISE = [
           inhalt: "TCP/IP, subnetting, VLAN, spanning tree, static and dynamic routing with OSPF, access lists and NAT.",
           praxis: "Systematised the routing practice: I have run OSPF in an ISP environment across several cities since 2015, plus MPLS and VPLS." } },
 
-  { datei: "python-fortgeschritten.pdf", anbieter: "Maktabkhooneh", jahr: "Januar 2023",
+  { anbieter: "Maktabkhooneh", jahr: "Januar 2023",
     de: { titel: "Advanced Python Programming", umfang: "56 Stunden · Nr. MK-GY99YX",
           inhalt: "Fortgeschrittene Sprachmittel, Datenstrukturen, REST-APIs, Fehlerbehandlung und sauberer Aufbau größerer Skripte.",
           praxis: "Automatisierung war zu diesem Zeitpunkt bereits Alltag: Skripte für Netzwerkgeräte, Zabbix-API und POP-Wartung, darunter die Bereinigung von rund 300 Geräten." },
@@ -104,7 +98,7 @@ const NACHWEISE = [
           inhalt: "Advanced language features, data structures, REST APIs, error handling and structuring larger scripts.",
           praxis: "Automation was already daily work by then: scripts for network devices, the Zabbix API and POP maintenance, including the cleanup of around 300 devices." } },
 
-  { datei: "python-grundlagen.pdf", anbieter: "Maktabkhooneh", jahr: "Dezember 2022",
+  { anbieter: "Maktabkhooneh", jahr: "Dezember 2022",
     de: { titel: "Python Programming for Beginners", umfang: "57 Stunden · Nr. MK-CA7JM5",
           inhalt: "Sprachgrundlagen, Kontrollstrukturen, Funktionen, Dateiverarbeitung und erste Automatisierung.",
           praxis: "Grundkurs der Python-Reihe, unmittelbar gefolgt vom Aufbaukurs." },

@@ -59,12 +59,6 @@
         }`;
       document.head.appendChild(style);
     }
-    const link = document.getElementById('cv-link');
-    if (link && matchMedia('(max-width:700px)').matches) {
-      const english = document.documentElement.lang.toLowerCase().startsWith('en');
-      link.textContent = english ? 'CV ↓' : 'Lebenslauf ↓';
-      link.setAttribute('aria-label', english ? 'Download CV (PDF)' : 'Lebenslauf herunterladen (PDF)');
-    }
   };
   const loadScript = (src) => new Promise((resolve, reject) => {
     const s = document.createElement('script');
@@ -94,7 +88,7 @@
       await loadScript('assets/js/lab-command-center.js?v=4');
       loadCss('assets/css/infrastructure-depth.css?v=4');
       await loadScript('assets/js/network-lab-v3.js?v=8');
-      await loadScript('assets/js/recruiter-polish.js?v=5');
+      await loadScript('assets/js/recruiter-polish.js?v=6');
       await loadScript('assets/js/infrastructure-depth.js?v=4');
       await loadScript('assets/js/portfolio-priority.js?v=4');
       await loadScript('assets/js/projects-showcase.js?v=4');

@@ -49,7 +49,6 @@
       <div class="recruiter-cta">
         <span class="title">Hiring signal</span>
         <div class="buttons">
-          <a class="primary" href="assets/docs/Lebenslauf_Mohammad_Askari_Dehestani.pdf" download>DOWNLOAD CV ↘</a>
           <a href="#network-lab">OPEN NETWORK LAB ↗</a>
         </div>
         <div class="recruiter-note"><i></i><span>Open to IT Infrastructure / System Administration roles · Erlangen</span></div>

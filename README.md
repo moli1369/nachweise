@@ -28,8 +28,6 @@ keine Abhängigkeiten außer der Schrift von Google Fonts.
     assets/js/inhalte.js      sämtliche Texte auf Deutsch und Englisch
     assets/js/app.js          Sprachumschaltung, Tafeln, Szene
     assets/img/szene.svg      die Illustration, rund 30 kB
-    assets/certificates/      die neun PDF-Nachweise
-    assets/docs/              Lebenslauf, CV und Zertifikatsmappe
 
 Die Illustration ist reines SVG mit Verläufen und Filtern — keine Bilddatei.
 Dadurch bleibt die Seite unter 100 kB, skaliert verlustfrei und die
@@ -49,7 +47,7 @@ Escape und gibt den Fokus zurück, `prefers-reduced-motion` wird respektiert.
 Deutsch und Englisch. Die Sprache ergibt sich in dieser Reihenfolge aus
 `?lang=de` beziehungsweise `?lang=en` in der Adresse, der zuletzt gewählten
 Sprache und der Browsersprache. Umgeschaltet wird ohne Neuladen; `<html lang>`
-wird mitgeführt und der Lebenslauf-Knopf wechselt auf die passende Fassung.
+wird mitgeführt.
 
 Für internationale Unternehmen lässt sich gezielt auf `…/?lang=en` verlinken.
 
@@ -69,7 +67,6 @@ Ein neuer Nachweis:
 
 ```js
 {
-  datei: "dateiname.pdf",          // liegt in assets/certificates/
   anbieter: "Plattform", jahr: "2026",
   de: { titel: "Kursname", umfang: "ca. 40 Stunden",
         inhalt: "Behandelte Themen.",
@@ -101,10 +98,8 @@ stehen, lässt sich mit dem Skript unter `werkzeug/buendeln.py` erzeugen. Sie
 - [ ] Die Adresse dieser Seite in den Lebenslauf eintragen
 - [ ] Beide Sprachfassungen gegenlesen
 
-Die Nachweise, die Lebensläufe und die Zertifikatsmappe liegen bereits an
-ihrem Platz. Weitere Nachweise kommen als PDF nach `assets/certificates/`
-und als Eintrag in die Liste `NACHWEISE`; die Zertifikatsmappe erzeugt
-`werkzeug/mappe.py` neu.
+Die Website enthält keine PDF-Dateien und bietet keine PDF-Downloads an.
+Kursbeschreibungen werden als Einträge in der Liste `NACHWEISE` gepflegt.
 
 ## Lizenz
 
