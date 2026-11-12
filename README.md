@@ -1,9 +1,9 @@
 # Nachweise und Projekte — Mohammad Askari Dehestani
 
-Eine einseitige Website, die meine Bewerbungsunterlagen ergänzt. Der
-Lebenslauf muss auf zwei Seiten passen; Kursnachweise, Projektdetails und
-Ausrüstungslisten passen dort nicht hinein, sind für eine fachliche
-Einschätzung aber oft genau das Interessante. Diese Seite trägt das nach.
+Eine interaktive Portfolio-Seite mit ausgewählten Infrastrukturprojekten,
+technischen Arbeitsproben und einem Network Operations Lab. Sie zeigt
+Netzwerkdesign, Routing, Virtualisierung und Monitoring anhand konkreter
+Szenarien aus dem praktischen Betrieb.
 
 **Live:** https://moli1369.github.io/nachweise/
 
@@ -95,7 +95,6 @@ stehen, lässt sich mit dem Skript unter `werkzeug/buendeln.py` erzeugen. Sie
 
 ## Vor dem Veröffentlichen
 
-- [ ] Die Adresse dieser Seite in den Lebenslauf eintragen
 - [ ] Beide Sprachfassungen gegenlesen
 
 Die Website enthält keine PDF-Dateien und bietet keine PDF-Downloads an.
