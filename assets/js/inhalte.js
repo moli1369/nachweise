@@ -218,12 +218,12 @@ const TAFELN = {
           text: ["Aufbau, Betrieb und Absicherung von Netzwerk- und Serverinfrastrukturen in ISP-, Unternehmens- und Industrieumgebungen. Schwerpunkte sind Virtualisierung, Windows Server mit Active Directory, Linux-Administration, Netzwerktechnik und Monitoring.",
                  "Ergänzend entwickle ich responsive Websites und Android-Apps — zuletzt das Taxi-Buchungssystem taxibaiersdorf.com und das Fotografie-Portfolio photobyarmita.com.",
                  "Seit Januar 2026 in Deutschland mit gültigem Aufenthaltstitel und uneingeschränkter Arbeitserlaubnis. Kurzfristig verfügbar und bundesweit umzugsbereit.",
-                 "Diese Seite ergänzt meinen Lebenslauf um die Nachweise und Projektbeschreibungen, für die dort kein Platz war."] },
+                 "Diese Seite dokumentiert ausgewählte Projekte, Nachweise und praktische Arbeit aus dem Infrastruktur-Betrieb."] },
     en: { marke: "Profile", titel: "System Administrator with over ten years of practice", art: "text",
           text: ["Designing, operating and securing network and server infrastructures across ISP, enterprise and industrial environments. The focus is virtualisation, Windows Server with Active Directory, Linux administration, networking and monitoring.",
                  "In addition, I build responsive websites and Android apps — most recently the taxi booking system taxibaiersdorf.com and the photography portfolio photobyarmita.com.",
                  "In Germany since January 2026 with a valid residence permit and unrestricted work authorisation. Available at short notice and willing to relocate nationwide.",
-                 "This page supplements my CV with the credentials and project descriptions there was no room for."] }
+                 "This page presents selected projects, credentials and hands-on work from infrastructure operations."] }
   },
   erfahrung: {
     de: { marke: "Erfahrung", titel: "Berufserfahrung", art: "stationen" },
